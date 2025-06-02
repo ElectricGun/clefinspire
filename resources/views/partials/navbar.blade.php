@@ -12,8 +12,9 @@
         <div class="col-3 py-4 px-0">
             <div class="input-group">
                 <i class="bi bi-search"></i>
-                <input type="email" class="form-control border-0 border-bottom border-5 rounded-0 py-0 shadow-none" id="search" placeholder="Search">
+                <input type="email" class="form-control border-0 border-5 rounded-0 py-0 shadow-none" id="search" placeholder="Search">
             </div>
+            <hr class="mt-1 border-3">
         </div>
         <div class="col-4">
             <div class="row d-flex justify-content-end">
@@ -24,7 +25,7 @@
                 <div class="col-5 d-flex align-items-center">
                     <div class="card ratio ratio-1x1 rounded-circle overflow-hidden" style="max-height: 75px; max-width: 75px;">
                       <img 
-                        src="https://fastly.picsum.photos/id/780/200/200.jpg?hmac=2eohvtsHnYuBD7aalSWH4h6L6EKelvoFD9TV0Ax1K2A" 
+                        src="https://picsum.photos/200" 
                         class="img-fluid w-100 h-100 object-fit-cover" 
                         alt="Profile image">
                     </div>
@@ -32,6 +33,6 @@
             </div>
         </div>
     </div>
-</div>
 
-<hr class="m-0">
+    <hr class="mt-2 border-3">
+</div>
