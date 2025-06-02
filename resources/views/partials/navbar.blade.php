@@ -7,7 +7,7 @@
 <div class="container"> 
     <div class="row mt-4 d-flex justify-content-between">
         <div class="col-4">
-            <h2 class="fw-bold">Home</h2>
+            <h2>Home</h2>
         </div>
         <div class="col-3 py-4 px-0">
             <div class="input-group">
@@ -19,7 +19,7 @@
         <div class="col-4">
             <div class="row d-flex justify-content-end">
                 <div class = "col-7 text-end">
-                    <h5>Beginner</h5>
+                    <h4>Beginner</h4>
                     <h5 class="text-muted">Level 4</h5>
                 </div>
                 <div class="col-5 d-flex align-items-center">
