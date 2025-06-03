@@ -4,77 +4,52 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Sign In</title>
+  <!-- Bootstrap 5 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" />
+  
   <style>
     body {
       font-family: 'Segoe UI', sans-serif;
       background: linear-gradient(to bottom, #f8a5c2, #e17055);
-      margin: 0;
-      padding: 0;
       display: flex;
       justify-content: center;
       align-items: center;
       height: 100vh;
+      margin: 0;
     }
 
     .container {
       background: #fff;
-      padding: 40px;
+      padding: 30px 40px;
       border-radius: 20px;
-      width: 360px;
       box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+      width: 100%;
+      max-width: 400px;
       text-align: center;
-      position: relative;
     }
 
     h2 {
       margin-bottom: 20px;
+      font-weight: bold;
+      color: #333;
     }
 
-    .input-group {
+    .mb-3 {
       text-align: left;
-      margin-bottom: 15px;
     }
 
-    .input-group label {
-      font-size: 14px;
-      margin-bottom: 5px;
-      display: block;
-    }
-
-    .input-group input {
-      width: 100%;
-      padding: 10px;
-      border-radius: 6px;
-      border: 1px solid #ccc;
-    }
-
-    .input-group .password-toggle {
+    .password-toggle {
       display: flex;
       justify-content: space-between;
-      align-items: center;
       font-size: 12px;
       margin-top: 5px;
-    }
-
-    .button {
-      width: 100%;
-      padding: 12px;
-      border: none;
-      background: #ccc;
-      border-radius: 20px;
-      color: white;
-      font-weight: bold;
-      cursor: pointer;
-      margin-top: 10px;
-    }
-
-    .button:hover {
-      background: #aaa;
     }
 
     .policy, .links {
       font-size: 12px;
       margin-top: 10px;
+      display: inline-block; /* Make the links inline */
+      white-space: nowrap; /* Prevent the text from wrapping */
     }
 
     .policy a, .links a {
@@ -85,18 +60,18 @@
     .create-account {
       margin-top: 20px;
       display: inline-block;
-      border: 1px solid #000;
       padding: 10px 40px;
       border-radius: 20px;
       background: #fff;
       font-weight: bold;
       text-decoration: none;
-      color: black;
+      color: #000;
+      border: 1px solid #000;
     }
 
     .footer {
       position: absolute;
-      bottom: -60px;
+      bottom: 20px;
       width: 100%;
       text-align: center;
       font-size: 12px;
@@ -108,34 +83,47 @@
       color: red;
       margin-top: 4px;
     }
+
+    /* Custom Grey Button */
+    .btn-grey {
+      background-color: #ccc;  /* Grey color */
+      border-color: #ccc;      /* Grey border */
+      color: #333;             /* Dark text color */
+    }
+
+    .btn-grey:hover {
+      background-color: #bbb;  /* Darker grey when hovering */
+      border-color: #bbb;      /* Darker border on hover */
+    }
   </style>
 </head>
 <body>
+
   <form class="container" method="POST" action="{{ route('signin.submit') }}">
     @csrf
-    <h2>Sign in</h2>
+    <h2>Sign In</h2>
 
-    <div class="input-group">
-      <label for="email">Enter your email</label>
-      <input type="email" name="email" id="email" value="{{ old('email') }}" required>
+    <div class="mb-3">
+      <label for="email" class="form-label">Enter your email</label>
+      <input type="email" class="form-control" id="email" name="email" value="{{ old('email') }}" required>
       @error('email')
         <div class="error">{{ $message }}</div>
       @enderror
     </div>
 
-    <div class="input-group">
-      <label for="password">Your password</label>
-      <input type="password" name="password" id="password" required>
+    <div class="mb-3">
+      <label for="password" class="form-label">Your password</label>
+      <input type="password" class="form-control" id="password" name="password" required>
       <div class="password-toggle">
         <span></span>
-        <span onclick="togglePassword()" style="cursor:pointer;">👁️ Hide</span>
+        <span onclick="togglePassword()" style="cursor:pointer;">👁️ Show</span>
       </div>
       @error('password')
         <div class="error">{{ $message }}</div>
       @enderror
     </div>
 
-    <button type="submit" class="button">Log in</button>
+    <button type="submit" class="btn btn-grey w-100">Log in</button>
 
     <div class="policy">
       By continuing, you agree to the <a href="#">Terms of use</a> and <a href="#">Privacy Policy</a>.
@@ -150,7 +138,7 @@
   </form>
 
   <div class="footer">
-    Help Center &nbsp;&nbsp; Terms of Service &nbsp;&nbsp; Privacy Policy &nbsp;&nbsp; @2022yanliudesign
+    Help Center &nbsp;&nbsp; Terms of Service &nbsp;&nbsp; Privacy Policy &nbsp;&nbsp; @2025Clefinspire
   </div>
 
   <script>
@@ -166,5 +154,9 @@
       }
     }
   </script>
+
+  <!-- Bootstrap JS (optional) -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+
 </body>
 </html>
