@@ -4,6 +4,8 @@
     }
 </style>
 
+@foreach($user as $p)
+
 <div class="container"> 
     <div class="row mt-4 d-flex justify-content-between">
         <div class="col-4">
@@ -20,7 +22,7 @@
             <div class="row d-flex justify-content-end">
                 <div class = "col-7 text-end">
                     <h4>Beginner</h4>
-                    <h5 class="text-muted">Level 4</h5>
+                    <h5 class="text-muted"> Level {{$p->user_level}}</h5>
                 </div>
                 <div class="col-5 d-flex align-items-center">
                     <div class="card ratio ratio-1x1 rounded-circle overflow-hidden" style="max-height: 75px; max-width: 75px;">
@@ -36,3 +38,5 @@
 
     <hr class="mt-2 border-3">
 </div>
+
+@endforeach
