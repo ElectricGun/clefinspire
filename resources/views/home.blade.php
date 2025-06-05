@@ -68,19 +68,16 @@
 
                 <div class = "card border-2 rounded-4 mt-3 pt-3 px-3 pb-2">
 
-                    @foreach($course as $c)
+                    @foreach($userlessons as $lesson)
                     <div class = "row">
                         <div class = "col-6">
-                            <span class="text-muted"> INSERT COURSE NAME </span>
+                            <span class="text-muted"> {{$lesson->title}} </span>
                         </div>
 
                         <div class = "col-6 text-end">
-                            {{-- UNHARDCODE --}}
-                            <span class="text-muted">80% Complete</span>
-                            
-                            {{-- UNHARDCODE --}}
+                            <span class="text-muted">{{$lesson->progress * 100 . "%"}} Complete</span>
                             <div class="progress mt-3 border border-dark rounded-5" style="min-height: 20px;">
-                                <div class="progress-bar bg-pal-red rounded-5 border border-dark" role="progressbar" style="width: 25%; " aria-valuenow="25"
+                                <div class="progress-bar bg-pal-red rounded-5 border border-dark" role="progressbar" style="width: {{$lesson->progress * 100}}%; " aria-valuenow={{$lesson->progress * 100}}
                                     aria-valuemin="0" aria-valuemax="100"></div>
                             </div>
                         </div>
