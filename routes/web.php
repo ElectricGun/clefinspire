@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\SigninController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -19,3 +21,5 @@ Route::get('/', function () {
 });
 
 Route::get('/home', [HomeController::class, 'show']);
+Route::get('/signin', [SigninController::class, 'show'])->name('signin');
+Route::post('/signin', [SigninController::class, 'submit'])->name('signin.submit');
