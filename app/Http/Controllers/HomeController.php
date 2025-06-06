@@ -11,24 +11,18 @@ class HomeController extends Controller
 {
     public function show() {
 
-        // $userid = Auth::user();
+        $logged_in_user = Auth::user();
 
-        // echo $userid;
+        if ($logged_in_user == null) {
+            return redirect('signin');
+        }
 
-        $userid = 1;
+        $userid = $logged_in_user->id;
 
         $user = DB::table('User')
         ->where('User.user_id','=', $userid)
         ->join('DisplayProfile', 'DisplayProfile.user_id', '=', 'User.user_id')
         ->select('User.*', 'DisplayProfile.*')
-        ->get();
-
-        $usercoursestatus = DB::table('UserCourse')
-        ->where('UserCourse.user_id', '=', $userid) 
-        ->join('UserLessonStatus', function($join) {
-            $join->on('UserCourse.user_id', '=', 'UserLessonStatus.user_id')
-                 ->on('UserCourse.course_id', '=', 'UserLessonStatus.course_id');
-        })
         ->get();
 
         $userlessons = DB::select(
@@ -48,14 +42,11 @@ class HomeController extends Controller
             )
             GROUP BY l.title, uqs.task_id
             "
-            ,[1, 1]
+            ,[
+                $userid, 
+                $userid
+            ]
         );
-
-
-        // foreach($userlessons as $e) {
-        //     echo $e->title . " " . $e->progress;
-        // }
-
         
         return view('home', [
             'user' => $user, 'userlessons' => $userlessons

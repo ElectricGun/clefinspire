@@ -116,7 +116,7 @@
       <input type="password" class="form-control" id="password" name="password" required>
       <div class="password-toggle">
         <span></span>
-        <span onclick="togglePassword()" style="cursor:pointer;">👁️ Show</span>
+        <span onclick="togglePassword()" style="cursor:pointer;">Show</span>
       </div>
       @error('password')
         <div class="error">{{ $message }}</div>
@@ -147,10 +147,10 @@
       const toggle = event.target;
       if (password.type === "password") {
         password.type = "text";
-        toggle.textContent = "🙈 Hide";
+        toggle.textContent = "Hide";
       } else {
         password.type = "password";
-        toggle.textContent = "👁️ Show";
+        toggle.textContent = "Show";
       }
     }
   </script>
