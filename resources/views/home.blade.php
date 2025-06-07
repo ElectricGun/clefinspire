@@ -7,7 +7,7 @@
     @include('partials.style_head')
 </head>
 
-<body>
+<body class="mb-5">
     @include('partials.navbar', ['user' => $user])
 
     {{-- [{"user_learning_streak":0,"user_xp":0,"user_subscription":0,"user_level":0,"account_id":1,"user_id":1,"display_name":"Artyom","bio":null,"status":null,"profile_picture":null}] --}}
