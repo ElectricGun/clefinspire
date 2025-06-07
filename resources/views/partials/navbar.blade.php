@@ -21,11 +21,9 @@
                         <h4>Beginner</h4>
                         <h5 class="text-muted"> Level {{ $p->user_level }}</h5>
                     </div>
-                    <div class="col-5 d-flex align-items-center">
-                        <div class="card ratio ratio-1x1 rounded-circle overflow-hidden"
-                            style="max-height: 75px; max-width: 75px;">
-                            <img src="https://picsum.photos/200" class="img-fluid w-100 h-100 object-fit-cover"
-                                alt="Profile image">
+                    <div class="col-auto d-flex align-items-center">
+                        <div class="card rounded-circle overflow-hidden" style="width: 75px; height: 75px;">
+                            <img src="https://picsum.photos/200" class="img-fluid w-100 h-100 object-fit-cover" alt="Profile image">
                         </div>
                     </div>
                 </div>
