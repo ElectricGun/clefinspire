@@ -28,6 +28,21 @@ class RegisterController extends Controller
             'password' => ['required', 'min:8'],
         ]);
 
+        $email_check = DB::table('users')->where('users.email', '=', $request->email)->get();
+        $name_check = DB::table('users')->where('users.name', '=', $request->name)->get();
+
+        if (sizeof($email_check) > 0) {
+            return back()->withErrors([
+                'email' => 'Email is already in use'
+            ])->withInput();
+        }
+
+        if (sizeof($name_check) > 0) {
+            return back()->withErrors([
+                'name' => 'Username is taken'
+            ])->withInput();
+        }
+
         $user = new User();
         $user->password = Hash::make($request->password);
         $user->email = $request->email;

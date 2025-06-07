@@ -17,8 +17,8 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', [HomeController::class, 'show']);
-
 Route::get('/home', [HomeController::class, 'show']);
+
 Route::get('/signin', [SigninController::class, 'show'])->name('signin');
 Route::post('/signin', [SigninController::class, 'submit'])->name('signin.submit');
 
