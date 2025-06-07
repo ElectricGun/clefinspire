@@ -16,9 +16,7 @@ use App\Http\Controllers\SigninController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [HomeController::class, 'show']);
 
 Route::get('/home', [HomeController::class, 'show']);
 Route::get('/signin', [SigninController::class, 'show'])->name('signin');
