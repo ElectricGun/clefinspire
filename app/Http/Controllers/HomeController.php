@@ -9,24 +9,27 @@ use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
 {
-    public function show() {
+    public function show()
+    {
 
         $logged_in_user = Auth::user();
 
         if ($logged_in_user == null) {
-            return redirect('signin');
+            return redirect('register');
         }
 
-        $userid = $logged_in_user->id;
+        $account_id = $logged_in_user->id;
 
-        $user = DB::table('User')
-        ->where('User.user_id','=', $userid)
-        ->join('DisplayProfile', 'DisplayProfile.user_id', '=', 'User.user_id')
-        ->select('User.*', 'DisplayProfile.*')
-        ->get();
+        $user = DB::table('users')
+            ->where('users.id', '=', $account_id)
+            ->join('User', 'User.account_id', '=', 'users.id')
+            ->join('DisplayProfile', 'DisplayProfile.user_id', '=', 'User.user_id')
+            ->select('users.*', 'User.*', 'DisplayProfile.*')
+            ->get();
 
-        $userlessons = DB::select(
-            "
+        foreach ($user as $u) {
+            $userlessons = DB::select(
+                "
             SELECT l.title, SUM(uqs.is_completed) / COUNT(uqs.is_completed) as progress from UserQuestionStatus uqs 
             JOIN UserCourse uc ON uc.user_id = ?
             JOIN UserLessonStatus uls ON uls.user_id = uc.user_id AND uls.course_id = uc.course_id
@@ -41,15 +44,17 @@ class HomeController extends Controller
                 AND uts.is_completed = 0
             )
             GROUP BY l.title, uqs.task_id
-            "
-            ,[
-                $userid, 
-                $userid
-            ]
-        );
-        
-        return view('home', [
-            'user' => $user, 'userlessons' => $userlessons
-        ]);
+            ",
+                [
+                    $u->user_id,
+                    $u->user_id
+                ]
+            );
+
+            return view('home', [
+                'user' => $user,
+                'userlessons' => $userlessons
+            ]);
+        }
     }
 }

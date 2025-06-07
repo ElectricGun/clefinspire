@@ -4,69 +4,55 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
-use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Validator;
 
 class RegisterController extends Controller
 {
-    /*
-    |--------------------------------------------------------------------------
-    | Register Controller
-    |--------------------------------------------------------------------------
-    |
-    | This controller handles the registration of new users as well as their
-    | validation and creation. By default this controller uses a trait to
-    | provide this functionality without requiring any additional code.
-    |
-    */
-
-    use RegistersUsers;
-
     /**
-     * Where to redirect users after registration.
+     * Show the application dashboard.
      *
-     * @var string
+     * @return \Illuminate\Contracts\Support\Renderable
      */
-    protected $redirectTo = '/home';
-
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
+    public function show()
     {
-        $this->middleware('guest');
+        return view('auth/register');
     }
 
-    /**
-     * Get a validator for an incoming registration request.
-     *
-     * @param  array  $data
-     * @return \Illuminate\Contracts\Validation\Validator
-     */
-    protected function validator(array $data)
+    public function submit(Request $request)
     {
-        return Validator::make($data, [
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
+        $validated = $request->validate([
+            'email' => ['required', 'email'],
+            'password' => ['required', 'min:8'],
         ]);
-    }
 
-    /**
-     * Create a new user instance after a valid registration.
-     *
-     * @param  array  $data
-     * @return \App\Models\User
-     */
-    protected function create(array $data)
-    {
-        return User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => Hash::make($data['password']),
-        ]);
+        $user = new User();
+        $user->password = Hash::make($request->password);
+        $user->email = $request->email;
+        $user->name = $request->name;
+        $user->save();
+
+        if (Auth::attempt($validated)) {
+
+            DB::table('User')->insert([
+                'account_id' => Auth::user()->id
+            ]);
+
+            $user_profile = DB::table('User')->where('account_id', '=', Auth::user()->id)->get();
+
+            foreach ($user_profile as $up) {
+                DB::table('DisplayProfile')->insert([
+                    'user_id' => $up->user_id
+                ]);
+            }
+
+            $request->session()->regenerate();
+
+            return redirect()->intended('/home');
+        }
+
+        return back()->withInput();
     }
 }

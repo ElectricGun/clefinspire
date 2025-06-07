@@ -5,8 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Sign In</title>
   <!-- Bootstrap 5 CSS -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" />
-  
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+
   <style>
     body {
       font-family: 'Segoe UI', sans-serif;
@@ -78,12 +79,6 @@
       color: #fff;
     }
 
-    .error {
-      font-size: 12px;
-      color: red;
-      margin-top: 4px;
-    }
-
     /* Custom Grey Button */
     .btn-grey {
       background-color: #ccc;  /* Grey color */
@@ -107,7 +102,7 @@
       <label for="email" class="form-label">Enter your email</label>
       <input type="email" class="form-control" id="email" name="email" value="{{ old('email') }}" required>
       @error('email')
-        <div class="error">{{ $message }}</div>
+        <div class="text-danger">{{ $message }}</div>
       @enderror
     </div>
 
@@ -119,7 +114,7 @@
         <span onclick="togglePassword()" style="cursor:pointer;">Show</span>
       </div>
       @error('password')
-        <div class="error">{{ $message }}</div>
+        <div class="text-danger">{{ $message }}</div>
       @enderror
     </div>
 
@@ -134,7 +129,7 @@
       <a href="#">Forget your password</a>
     </div>
 
-    <a href="#" class="create-account">Create an account</a>
+    <a href="/register" class="create-account">Create an account</a>
   </form>
 
   <div class="footer">
