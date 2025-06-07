@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LandingController;
-use App\Http\Controllers\MusicTheoryController;
+use App\Http\Controllers\CourseController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,4 +22,4 @@ Route::get('/', function () {
 
 Route::get('/landing', [LandingController::class, 'show']);
 
-Route::get('/musictheory', [MusicTheoryController::class, 'show']);
+Route::get('/musictheory', [CourseController::class, 'show']);
