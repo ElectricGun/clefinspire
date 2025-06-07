@@ -12,10 +12,10 @@
             <h3 class="text-center mb-2 fw-bold">Create an account</h3>
             <p class="text-center mb-4">
                 Already have an account?
-                <a href="{{ route('signin') }}">Log in</a>
+                <a href="/signin">Log in</a>
             </p>
 
-            <form method="POST" action="{{ route('register.submit') }}">
+            <form method="POST" action="/register/post">
                 @csrf
 
                 <div class="mb-3">

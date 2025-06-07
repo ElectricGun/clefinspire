@@ -4,6 +4,8 @@ use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\SigninController;
 use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\LandingController;
+use App\Http\Controllers\MusicTheoryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,12 +18,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', [HomeController::class, 'show']);
+Route::get('/', [LandingController::class, 'show']);
 Route::get('/home', [HomeController::class, 'show']);
 
-Route::get('/signin', [SigninController::class, 'show'])->name('signin');
-Route::post('/signin', [SigninController::class, 'submit'])->name('signin.submit');
+Route::get('/signin', [SigninController::class, 'show']);
+Route::post('/signin/post', [SigninController::class, 'submit']);
 
-Route::get('/register', [RegisterController::class, 'show'])->name('register');
-Route::post('/register', [RegisterController::class, 'submit'])->name('register.submit');
+Route::get('/register', [RegisterController::class, 'show']);
+Route::post('/register/post', [RegisterController::class, 'submit']);
 
+Route::get('/musictheory', [MusicTheoryController::class, 'show']);

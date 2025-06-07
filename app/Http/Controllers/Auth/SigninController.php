@@ -23,11 +23,10 @@ class SigninController extends Controller
         if (Auth::attempt($validated)) {
             $request->session()->regenerate();
             return redirect()->intended('/home');
+        } else {
+            return back()->withErrors([
+                'email' => 'Invalid credentials.',
+            ])->withInput();
         }
-
-        return back()->withErrors([
-            'email' => 'Invalid credentials.',
-        ])->withInput();
     }
 }
-

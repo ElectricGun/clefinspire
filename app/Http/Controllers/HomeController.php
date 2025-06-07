@@ -13,7 +13,7 @@ class HomeController extends Controller
         $logged_in_user = Auth::user();
 
         if ($logged_in_user == null) {
-            return redirect('register');
+            return redirect('/');
         }
 
         $account_id = $logged_in_user->id;

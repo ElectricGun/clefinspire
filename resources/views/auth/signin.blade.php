@@ -89,7 +89,7 @@
 
     <body>
 
-        <form class="container" method="POST" action="{{ route('signin.submit') }}">
+        <form class="container" method="POST" action="/signin/post">
             @csrf
             <h2>Sign In</h2>
 
@@ -133,9 +133,9 @@
                 <a href="#">Forget your password</a>
             </div>
 
-            <br>
-
-            <a href="/register" class="create-account">Create an account</a>
+            <div>
+                <a href="/register" class="create-account">Create an account</a>
+            </div>
         </form>
 
         <div class="footer">

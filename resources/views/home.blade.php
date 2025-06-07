@@ -2,7 +2,6 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
     <title>Home</title>
 
     @include('partials.style_head')
@@ -19,12 +18,12 @@
                 <h1>Welcome {{ $p->display_name == null ? $p->name : $p->display_name }}!</h1>
             </div>
 
-            <div class="row d-flex justify-content-center mt-3">
+            <div class="row d-flex justify-content-center mt-3 align-items-stretch">
                 <div class="col-12 col-md-10 col-lg-8">.
                     <div class = "row">
-                        <div class="col-lg-6 col-6 pe-3 pe-md-4 pe-lg-5">
+                        <div class="col-md-6 col-12 pe-3 pe-md-4 pe-lg-5">
                             <div
-                                class="card bg-pal-red border-2 rounded-4 border-dark home-card w-100 d-flex flex-column pb-3">
+                                class="card bg-pal-red border-2 rounded-4 border-dark home-card w-100 h-100 d-flex flex-column pb-3">
                                 <h5 class="fw-bold p-3 text-light"> Daily Quest </h5>
 
                                 {{-- UNHARDCODE QUEST NAME --}}
@@ -36,15 +35,15 @@
                         </div>
 
 
-                        <div class="col-lg-6 col-6 ps-3 ps-md-4 ps-lg-5">
-                            <div class="card bg-pal-red border-2 rounded-4 border-dark home-card w-100">
+                        <div class="col-md-6 col-12 ps-3 ps-md-4 ps-lg-5 mt-4 mt-md-0">
+                            <div class="card bg-pal-red border-2 rounded-4 border-dark home-card w-100 h-100">
                                 <h5 class="fw-bold px-3 pt-3 m-0 text-light"> Learning Streak </h5>
 
-                                <div class="text-center px-3">
+                                <div class="text-center px-3 mt-4">
                                     <span class="fw-bold text-light" style="font-size: 50px"> 
                                         <i class="bi bi-lightning-charge-fill"></i>
                                         
-                                        <span style="font-size: 75px"> {{$p->user_learning_streak}} </span>
+                                        <span> {{$p->user_learning_streak}} </span>
                                     </span>
                                     <span class="text-light fw-bold">
                                         {{-- plural/singular --}}
