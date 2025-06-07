@@ -38,14 +38,16 @@
 
                         <div class="col-lg-6 col-6 ps-3 ps-md-4 ps-lg-5">
                             <div class="card bg-pal-red border-2 rounded-4 border-dark home-card w-100">
-                                <h5 class="fw-bold p-3 text-light"> Learning Streak </h5>
+                                <h5 class="fw-bold px-3 pt-3 m-0 text-light"> Learning Streak </h5>
 
-                                <div class="text-center px-3 py-2">
+                                <div class="text-center px-3">
                                     <span class="fw-bold text-light" style="font-size: 50px"> 
                                         <i class="bi bi-lightning-charge-fill"></i>
-                                        {{$p->user_learning_streak}} 
+                                        
+                                        <span style="font-size: 75px"> {{$p->user_learning_streak}} </span>
                                     </span>
                                     <span class="text-light fw-bold">
+                                        {{-- plural/singular --}}
                                     Day{{$p->user_learning_streak != 1 ? 's' : ''}}
                                     </span>
                                 </div>
