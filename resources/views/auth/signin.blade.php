@@ -1,157 +1,166 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Sign In</title>
-  <!-- Bootstrap 5 CSS -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+@extends('layouts.app')
 
-  <style>
-    body {
-      font-family: 'Segoe UI', sans-serif;
-      background: linear-gradient(to bottom, #f8a5c2, #e17055);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      margin: 0;
-    }
+@section('content')
+    <style>
+        body {
+            background: linear-gradient(to bottom, #FCD3D3, #A92C2C);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
 
-    .container {
-      background: #fff;
-      padding: 30px 40px;
-      border-radius: 20px;
-      box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
-      width: 100%;
-      max-width: 400px;
-      text-align: center;
-    }
+        .container {
+            background: #fff;
+            padding: 30px 40px;
+            border-radius: 20px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 600px;
+            text-align: center;
+        }
 
-    h2 {
-      margin-bottom: 20px;
-      font-weight: bold;
-      color: #333;
-    }
+        h2 {
+            margin-bottom: 20px;
+            font-weight: bold;
+            color: #333;
+            z
+        }
 
-    .mb-3 {
-      text-align: left;
-    }
+        .mb-3 {
+            text-align: left;
+        }
 
-    .password-toggle {
-      display: flex;
-      justify-content: space-between;
-      font-size: 12px;
-      margin-top: 5px;
-    }
+        .policy,
+        .links {
+            font-size: 12px;
+            margin-top: 10px;
+            display: inline-block;
+            /* Make the links inline */
+            white-space: nowrap;
+            /* Prevent the text from wrapping */
+        }
 
-    .policy, .links {
-      font-size: 12px;
-      margin-top: 10px;
-      display: inline-block; /* Make the links inline */
-      white-space: nowrap; /* Prevent the text from wrapping */
-    }
+        .policy a,
+        .links a {
+            color: #000;
+            text-decoration: underline;
+        }
 
-    .policy a, .links a {
-      color: #000;
-      text-decoration: underline;
-    }
+        .create-account {
+            margin-top: 20px;
+            display: inline-block;
+            padding: 10px 40px;
+            border-radius: 20px;
+            background: #fff;
+            font-weight: bold;
+            text-decoration: none;
+            color: #000;
+            border: 1px solid #000;
+        }
 
-    .create-account {
-      margin-top: 20px;
-      display: inline-block;
-      padding: 10px 40px;
-      border-radius: 20px;
-      background: #fff;
-      font-weight: bold;
-      text-decoration: none;
-      color: #000;
-      border: 1px solid #000;
-    }
+        .footer {
+            position: absolute;
+            bottom: 20px;
+            width: 100%;
+            text-align: center;
+            font-size: 12px;
+            color: #fff;
+        }
 
-    .footer {
-      position: absolute;
-      bottom: 20px;
-      width: 100%;
-      text-align: center;
-      font-size: 12px;
-      color: #fff;
-    }
+        /* Custom Grey Button */
+        .btn-grey {
+            background-color: #ccc;
+            /* Grey color */
+            border-color: #ccc;
+            /* Grey border */
+            color: #333;
+            /* Dark text color */
+        }
 
-    /* Custom Grey Button */
-    .btn-grey {
-      background-color: #ccc;  /* Grey color */
-      border-color: #ccc;      /* Grey border */
-      color: #333;             /* Dark text color */
-    }
+        .btn-grey:hover {
+            background-color: #bbb;
+            /* Darker grey when hovering */
+            border-color: #bbb;
+            /* Darker border on hover */
+        }
+    </style>
 
-    .btn-grey:hover {
-      background-color: #bbb;  /* Darker grey when hovering */
-      border-color: #bbb;      /* Darker border on hover */
-    }
-  </style>
-</head>
-<body>
+    <body>
 
-  <form class="container" method="POST" action="{{ route('signin.submit') }}">
-    @csrf
-    <h2>Sign In</h2>
+        <form class="container" method="POST" action="{{ route('signin.submit') }}">
+            @csrf
+            <h2>Sign In</h2>
 
-    <div class="mb-3">
-      <label for="email" class="form-label">Enter your email</label>
-      <input type="email" class="form-control" id="email" name="email" value="{{ old('email') }}" required>
-      @error('email')
-        <div class="text-danger">{{ $message }}</div>
-      @enderror
-    </div>
+            <div class="mb-3">
+                <label for="email" class="form-label">Enter your email</label>
+                <input type="email" class="form-control" id="email" name="email" value="{{ old('email') }}" required>
+                @error('email')
+                    <div class="text-danger">{{ $message }}</div>
+                @enderror
+            </div>
 
-    <div class="mb-3">
-      <label for="password" class="form-label">Your password</label>
-      <input type="password" class="form-control" id="password" name="password" required>
-      <div class="password-toggle">
-        <span></span>
-        <span onclick="togglePassword()" style="cursor:pointer;">Show</span>
-      </div>
-      @error('password')
-        <div class="text-danger">{{ $message }}</div>
-      @enderror
-    </div>
+            <div class="mb-3">
+                <div class="d-flex justify-content-between">
+                    <span>
+                        <label for="password" class="form-label">Your password</label>
+                    </span>
 
-    <button type="submit" class="btn btn-grey w-100">Log in</button>
+                    <span>
+                        <span onclick="togglePassword()" style="cursor:pointer;">
+                            <i id="eye-hide" class="bi bi-eye-slash"></i>
+                            <i id="eye-show" class="bi bi-eye"></i>
+                            <span id="show-hide"> Show </span>
+                        </span>
+                    </span>
+                </div>
+                <input type="password" class="form-control" id="password" name="password" required>
 
-    <div class="policy">
-      By continuing, you agree to the <a href="#">Terms of use</a> and <a href="#">Privacy Policy</a>.
-    </div>
+                @error('password')
+                    <div class="text-danger">{{ $message }}</div>
+                @enderror
+            </div>
 
-    <div class="links">
-      <a href="#">Other issue with sign in</a> |
-      <a href="#">Forget your password</a>
-    </div>
+            <button type="submit" class="btn btn-grey w-100">Log in</button>
 
-    <a href="/register" class="create-account">Create an account</a>
-  </form>
+            <div class="policy">
+                By continuing, you agree to the <a href="#">Terms of use</a> and <a href="#">Privacy Policy</a>.
+            </div>
 
-  <div class="footer">
-    Help Center &nbsp;&nbsp; Terms of Service &nbsp;&nbsp; Privacy Policy &nbsp;&nbsp; @2025Clefinspire
-  </div>
+            <div class="links">
+                <a href="#">Other issue with sign in</a> |
+                <a href="#">Forget your password</a>
+            </div>
 
-  <script>
-    function togglePassword() {
-      const password = document.getElementById("password");
-      const toggle = event.target;
-      if (password.type === "password") {
-        password.type = "text";
-        toggle.textContent = "Hide";
-      } else {
-        password.type = "password";
-        toggle.textContent = "Show";
-      }
-    }
-  </script>
+            <br>
 
-  <!-- Bootstrap JS (optional) -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+            <a href="/register" class="create-account">Create an account</a>
+        </form>
 
-</body>
-</html>
+        <div class="footer">
+            Help Center &nbsp;&nbsp; Terms of Service &nbsp;&nbsp; Privacy Policy &nbsp;&nbsp; @2025Clefinspire
+        </div>
+
+        <script>
+            document.getElementById("eye-hide").style.display = "none"
+
+            function togglePassword() {
+                const password = document.getElementById("password");
+                const showHide = document.getElementById("show-hide");
+
+                if (password.type === "password") {
+                    password.type = "text";
+                    showHide.textContent = "Hide";
+                    document.getElementById("eye-hide").style.display = "inline"
+                    document.getElementById("eye-show").style.display = "none"
+                } else {
+                    password.type = "password";
+                    showHide.textContent = "Show";
+                    document.getElementById("eye-hide").style.display = "none"
+                    document.getElementById("eye-show").style.display = "inline"
+                }
+            }
+        </script>
+    </body>
+@endsection
