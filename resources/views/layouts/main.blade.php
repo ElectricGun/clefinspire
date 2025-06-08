@@ -20,11 +20,9 @@
                     <i class="bi bi-list bi-lg py-2 p-1"></i>
                 </a>
 
-                @foreach ($user as $p)
-                    <div class="container mb-5">
-                        @yield('content')
-                    </div>
-                @endforeach
+                <div class="container mb-5">
+                    @yield('content')
+                </div>
             </div>
         </div>
     </div>

@@ -8,7 +8,7 @@
     <div class="container">
         <div class="row mt-4 d-flex justify-content-between">
             <div class="col-4">
-                <h2>Home</h2>
+                <h2>{{isset($pagetitle) ? $pagetitle : '<ERR PAGE NAME UNSET>'}}</h2>
             </div>
 
             <div class="col-md-4 col-md-4 py-4 px-0 d-none d-md-block">

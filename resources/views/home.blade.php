@@ -4,7 +4,7 @@
     @foreach ($user as $p)
         <div class="container mb-5">
 
-            @include('partials.navbar', ['user' => $user])
+            @include('partials.navbar', ['user' => $user, 'pagetitle' => 'home'])
             <div class="row text-center">
                 <h1>Welcome {{ $p->display_name == null ? $p->name : $p->display_name }}!</h1>
             </div>
@@ -77,36 +77,3 @@
         </div>
     @endforeach
 @endsection
-{{-- <body>
-    <div class="container-fluid">
-        <div class="row flex-nowrap">
-            <div class="col-auto px-0 bg-gradient-pal-red">
-                <div id="sidebar" class="collapse collapse-horizontal show border-end">
-                    <div id="sidebar-nav" class="list-group border-0 rounded-0 text-sm-start min-vh-100 p-0"
-                        style="width: 300px">
-
-                        <div class="container">
-                            <div class="row">
-                                <div class="col text-center py-5"> 
-                                    <h2>Clefinspire </h2>
-                                </div>
-                            </div>  
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-            <div class="col p-0 m-0">
-                <a href="#" data-bs-target="#sidebar" data-bs-toggle="collapse"
-                    class="border rounded-3 p-1 text-decoration-none position-fixed bg-dark text-light py-5"
-                    style="top: 50vh;">
-                    <i class="bi bi-list bi-lg py-2 p-1"></i>
-                </a>
-
-                
-            </div>
-        </div>
-    </div>
-</body>
-
- --}}
