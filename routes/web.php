@@ -6,7 +6,7 @@ use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LandingController;
 use App\Http\Controllers\MusicTheoryController;
-
+use App\Http\Controllers\UserProfileController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -28,3 +28,5 @@ Route::get('/register', [RegisterController::class, 'show']);
 Route::post('/register/post', [RegisterController::class, 'submit']);
 
 Route::get('/musictheory', [MusicTheoryController::class, 'show']);
+
+Route::get('/userprofile', [UserProfileController::class, 'show']);
