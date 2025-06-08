@@ -17,7 +17,7 @@
     </style>
 </head>
 
-<body>
+<body class="bg-gradient-pal-red">
     <div class="container">
         <div style="text-align: center; color: #000000">
             <h1 style="font-size: 80px; font-weight: bold;">Clefinspire</h1>
