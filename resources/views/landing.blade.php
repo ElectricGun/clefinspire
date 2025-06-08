@@ -2,11 +2,11 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Clefinspire</title>
 
     @include('partials.style_head')
+
+    <meta name="viewport" content="width=device-width, initial-scale=.6, minimum-scale=.6, maximum-scale=1, user-scalable=yes">
 
     <style>
         body {
@@ -18,9 +18,9 @@
 </head>
 
 <body class="bg-gradient-pal-red">
-    <div class="container">
+    <div class="container" style="min-width: 120px">
         <div style="text-align: center; color: #000000">
-            <h1 style="font-size: 80px; font-weight: bold;">Clefinspire</h1>
+            <h1 class="fw-bold" style="font-size: 80px">Clefinspire</h1>
             <p style="font-size: 20px; margin-bottom: 30px">Fun ways to learn music!</p>
             <div>
                 <a href="/register"><button class=btn
