@@ -4,7 +4,7 @@
     @foreach ($user as $p)
         <div class="container mb-5">
 
-            @include('partials.navbar', ['user' => $user, 'pagetitle' => 'home'])
+            @include('partials.navbar', ['user' => $user, 'pagetitle' => 'Home'])
             <div class="row text-center">
                 <h1>Welcome {{ $p->display_name == null ? $p->name : $p->display_name }}!</h1>
             </div>
