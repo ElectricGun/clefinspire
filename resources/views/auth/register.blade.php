@@ -1,6 +1,18 @@
 @extends('layouts.auth')
 
 @section('content')
+    <style>
+        .footer {
+            position: absolute;
+            bottom: 20px;
+            text-align: center;
+            font-size: 12px;
+            color: #fff;
+            left: 50vw;
+            transform: translateX(-50%);
+        }
+    </style>
+
     <body class="bg-gradient-pal-red">
         <div class="container d-flex justify-content-center align-items-center" style="min-height: 100vh;">
             <div class="card p-4 shadow-lg" style="max-width: 450px; width: 100%; border-radius: 20px;">
@@ -61,6 +73,11 @@
 
                 </form>
             </div>
+        </div>
+
+        <div class="footer">
+            Help&nbsp;Center&nbsp;&nbsp;Terms&nbsp;of&nbsp;Service&nbsp;&nbsp;Privacy&nbsp;Policy
+            &nbsp;&nbsp;@2025Clefinspire
         </div>
     </body>
 @endsection

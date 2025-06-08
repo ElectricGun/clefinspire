@@ -8,6 +8,11 @@
 
 <style>
 
+    .body {
+        max-width: 100vw;
+        overflow-x: hidden;
+    }
+
     .bg-gradient-pal-red {
         background: linear-gradient(to bottom, #FCD3D3, #A92C2C);
     }

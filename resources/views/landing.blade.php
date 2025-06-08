@@ -5,9 +5,7 @@
     <title>Clefinspire</title>
 
     @include('partials.style_head')
-
-    <meta name="viewport" content="width=device-width, initial-scale=.6, minimum-scale=.6, maximum-scale=1, user-scalable=yes">
-
+    
     <style>
         body {
             display: flex;
