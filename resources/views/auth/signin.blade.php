@@ -1,9 +1,8 @@
-@extends('layouts.app')
+@extends('layouts.auth')
 
 @section('content')
     <style>
         body {
-            background: linear-gradient(to bottom, #FCD3D3, #A92C2C);
             display: flex;
             justify-content: center;
             align-items: center;
@@ -87,7 +86,7 @@
         }
     </style>
 
-    <body>
+    <body class="bg-gradient-pal-red">
 
         <form class="container" method="POST" action="/signin/post">
             @csrf

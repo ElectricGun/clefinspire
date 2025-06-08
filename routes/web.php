@@ -27,4 +27,4 @@ Route::post('/signin/post', [SigninController::class, 'submit']);
 Route::get('/register', [RegisterController::class, 'show']);
 Route::post('/register/post', [RegisterController::class, 'submit']);
 
-Route::get('/musictheory', [MusicTheoryController::class, 'show']);
+Route::get('/courses/musictheory', [MusicTheoryController::class, 'show']);
