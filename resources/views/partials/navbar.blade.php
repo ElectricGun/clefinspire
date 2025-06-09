@@ -16,17 +16,19 @@
             </div>
 
             <div class="col-8 col-md-4">
-                <div class="row d-flex justify-content-end">
-                    <div class = "col-7 text-end">
-                        <h4>Beginner</h4>
-                        <h5 class="text-muted"> Level {{ $p->user_level }}</h5>
-                    </div>
-                    <div class="col-auto d-flex align-items-center">
-                        <div class="card rounded-circle overflow-hidden" style="width: 75px; height: 75px;">
-                            <img src="https://picsum.photos/200" class="img-fluid w-100 h-100 object-fit-cover" alt="Profile image">
+                <a href="../userprofile" class="text-decoration-none text-dark">
+                    <div class="row d-flex justify-content-end align-items-center">
+                        <div class="col-7 text-end">
+                            <h4>Beginner</h4>
+                            <h5 class="text-muted">Level {{ $p->user_level }}</h5>
+                        </div>
+                        <div class="col-auto d-flex align-items-center">
+                            <div class="card rounded-circle overflow-hidden" style="width: 75px; height: 75px;">
+                                <img src="https://picsum.photos/200" class="img-fluid w-100 h-100 object-fit-cover" alt="Profile image">
+                            </div>
                         </div>
                     </div>
-                </div>
+                </a>
             </div>
         </div>
 
