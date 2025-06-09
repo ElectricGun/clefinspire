@@ -28,8 +28,8 @@ class RegisterController extends Controller
             'password' => ['required', 'min:8'],
         ]);
 
-        $email_check = DB::table('users')->where('users.email', '=', $request->email)->get();
-        $name_check = DB::table('users')->where('users.name', '=', $request->name)->get();
+        $email_check = DB::table('Account')->where('Account.email', '=', $request->email)->get();
+        $name_check = DB::table('Account')->where('Account.name', '=', $request->name)->get();
 
         if (sizeof($email_check) > 0) {
             return back()->withErrors([

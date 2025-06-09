@@ -18,11 +18,11 @@ class ClefinspireAuth extends Controller {
         $account_id = $logged_in_user->id;
         
 
-        $user = DB::table('users')
-            ->where('users.id', '=', $account_id)
-            ->join('User', 'User.account_id', '=', 'users.id')
+        $user = DB::table('Account')
+            ->where('Account.id', '=', $account_id)
+            ->join('User', 'User.account_id', '=', 'Account.id')
             ->join('DisplayProfile', 'DisplayProfile.user_id', '=', 'User.user_id')
-            ->select('users.*', 'User.*', 'DisplayProfile.*')
+            ->select('Account.*', 'User.*', 'DisplayProfile.*')
             ->get();
         
         return $user;
