@@ -1,7 +1,1 @@
-# Brief Description
-
-Learning music is akin to learning a new language; it takes discipline and habit to achieve the desired goal. Language learning is very accessible in this day and age, apps such as Duolingo and Memrise provide an easy way to implement language learning into one’s daily life. Music theory, specifically the western variant, is quite arcane and complicated, with thousands of years of development and seemingly nonsensical conventions and cultural influences. Due to this fact, learning music theory may be daunting to many. Therefore, we propose an application that gives future musicians a way to implement music theory and ear training into their daily lives, without making them feel as if their skills are not up to standard.
-<br><br>
-Ear training is an arduous task that may take months or even years to reach an acceptable level. We believe that by giving the users an insight on their skill improvement, the probability of them giving up entirely is reduced. 
-<br><br>
-Clefinspire is a web application containing courses and tutorials on music theory and ear training. With this app, users are given course materials that are based on their current skill level, which they are able to manually select. The key selling point is the form of teaching. Course materials are given to users daily in bite-size pieces. This way, the system will easily be able to track the user’s improvements on the materials. If the user’s think their skills seem to be declining, they will be given the option to retry an earlier course to refresh their memory.
+Clefinspire is a Laravel based webapp for the Software Design and Development (IS, semester 4) containing courses and tutorials on music theory and ear training.
