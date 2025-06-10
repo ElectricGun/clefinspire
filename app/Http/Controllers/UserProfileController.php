@@ -15,13 +15,13 @@ class UserProfileController extends Controller
         return redirect('/');
     }
 
-    $profileData = DB::table('users')
-        ->where('users.id', $user->id)
-        ->leftJoin('User', 'User.account_id', '=', 'users.id')
+    $profileData = DB::table('Account')
+        ->where('Account.id', $user->id)
+        ->leftJoin('User', 'User.account_id', '=', 'Account.id')
         ->leftJoin('DisplayProfile', 'DisplayProfile.user_id', '=', 'User.user_id')
         ->select(
-            'users.name',
-            'users.email',
+            'Account.name',
+            'Account.email',
             'User.user_id',
             'User.user_learning_streak',
             'User.user_xp',
