@@ -18,7 +18,7 @@ use App\Http\Controllers\MusicTheoryController;
 |
 */
 
-Route::get('/', [LandingController::class, 'show']);
+Route::get('/', [HomeController::class, 'show']);
 Route::get('/home', [HomeController::class, 'show']);
 
 Route::get('/signin', [SigninController::class, 'show']);
