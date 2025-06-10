@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Controllers\Auth\ClefinspireAuth;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
@@ -10,20 +11,11 @@ class HomeController extends Controller
     public function show()
     {
 
-        $logged_in_user = Auth::user();
+        $user = ClefinspireAuth::get_user();
 
-        if ($logged_in_user == null) {
-            return redirect('/');
-        }
-
-        $account_id = $logged_in_user->id;
-
-        $user = DB::table('users')
-            ->where('users.id', '=', $account_id)
-            ->join('User', 'User.account_id', '=', 'users.id')
-            ->join('DisplayProfile', 'DisplayProfile.user_id', '=', 'User.user_id')
-            ->select('users.*', 'User.*', 'DisplayProfile.*')
-            ->get();
+        if ($user === null) {
+            return redirect("/");
+        }  
 
         foreach ($user as $u) {
             $userlessons = DB::select(

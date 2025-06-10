@@ -1,22 +1,21 @@
-@extends('layouts.app')
+@extends('layouts.auth')
 
 @section('content')
     <style>
         body {
-            background: linear-gradient(to bottom, #FCD3D3, #A92C2C);
-            display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
             margin: 0;
+
+            max-width: 100vw;
         }
 
         .container {
             background: #fff;
             padding: 30px 40px;
             border-radius: 20px;
-            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
-            width: 100%;
+            box-shadow: 0 0 15px rgba(92, 91, 91, 0.1);
             max-width: 600px;
             text-align: center;
         }
@@ -25,7 +24,6 @@
             margin-bottom: 20px;
             font-weight: bold;
             color: #333;
-            z
         }
 
         .mb-3 {
@@ -38,7 +36,6 @@
             margin-top: 10px;
             display: inline-block;
             /* Make the links inline */
-            white-space: nowrap;
             /* Prevent the text from wrapping */
         }
 
@@ -63,10 +60,11 @@
         .footer {
             position: absolute;
             bottom: 20px;
-            width: 100%;
             text-align: center;
             font-size: 12px;
             color: #fff;
+            left: 50vw;
+            transform: translateX(-50%);
         }
 
         /* Custom Grey Button */
@@ -87,7 +85,7 @@
         }
     </style>
 
-    <body>
+    <body class="bg-gradient-pal-red px-3 d-flex">
 
         <form class="container" method="POST" action="/signin/post">
             @csrf
@@ -139,7 +137,7 @@
         </form>
 
         <div class="footer">
-            Help Center &nbsp;&nbsp; Terms of Service &nbsp;&nbsp; Privacy Policy &nbsp;&nbsp; @2025Clefinspire
+            Help&nbsp;Center&nbsp;&nbsp;Terms&nbsp;of&nbsp;Service&nbsp;&nbsp;Privacy&nbsp;Policy &nbsp;&nbsp;@2025Clefinspire
         </div>
 
         <script>

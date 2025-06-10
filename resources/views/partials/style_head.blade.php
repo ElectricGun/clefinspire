@@ -7,6 +7,16 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js" integrity="sha384-j1CDi7MgGQ12Z7Qab0qlWQ/Qqz24Gc6BM0thvEMVjHnfYGF0rmFCozFSxQBxwHKO" crossorigin="anonymous"></script>
 
 <style>
+
+    .body {
+        max-width: 100vw;
+        overflow-x: hidden;
+    }
+
+    .bg-gradient-pal-red {
+        background: linear-gradient(to bottom, #FCD3D3, #A92C2C);
+    }
+
     .bg-pal-red {
         background: #EE6464 !important;
     }
