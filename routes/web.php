@@ -1,8 +1,10 @@
 <?php
 
+use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\Auth\SigninController;
+use App\Http\Controllers\CoursesController;
+use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\LandingController;
-use App\Http\Controllers\CourseController;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,11 +17,14 @@ use App\Http\Controllers\CourseController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [HomeController::class, 'show']);
+Route::get('/home', [HomeController::class, 'show']);
 
+Route::get('/signin', [SigninController::class, 'show']);
+Route::post('/signin/post', [SigninController::class, 'submit']);
 
-Route::get('/landing', [LandingController::class, 'show']);
+Route::get('/register', [RegisterController::class, 'show']);
+Route::post('/register/post', [RegisterController::class, 'submit']);
 
-Route::get('/musictheory', [CourseController::class, 'show']);
+Route::get('/courses/musictheory', [CoursesController::class, 'show_music_theory']);
+Route::get('/courses/eartraining', [CoursesController::class, 'show_ear_training']);
