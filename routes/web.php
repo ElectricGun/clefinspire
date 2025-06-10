@@ -21,6 +21,7 @@ use App\Http\Controllers\UserProfileController;
 */
 
 Route::get('/', [HomeController::class, 'show']);
+Route::get('/landing', [LandingController::class, 'show']);
 Route::get('/home', [HomeController::class, 'show']);
 
 Route::get('/signin', [SigninController::class, 'show']);
