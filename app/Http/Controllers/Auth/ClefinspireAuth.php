@@ -12,7 +12,7 @@ class ClefinspireAuth extends Controller {
         $logged_in_user = Auth::user();
 
         if ($logged_in_user == null) {
-            return redirect('/');
+            return null;
         }
 
         $account_id = $logged_in_user->id;
