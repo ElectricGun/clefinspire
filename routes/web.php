@@ -7,7 +7,6 @@ use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LandingController;
-use App\Http\Controllers\MusicTheoryController;
 use App\Http\Controllers\UserProfileController;
 
 /*
