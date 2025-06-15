@@ -54,6 +54,7 @@ class CourseSeeder extends Seeder
 
             $create_task = function($title, $preq = null) use (&$task_xp, &$lesson_id, &$previous_task_id) {
                 
+                // because circular dependency
                 DB::statement('SET FOREIGN_KEY_CHECKS = 0;');
                 
                 DB::table('Task')->insert([
