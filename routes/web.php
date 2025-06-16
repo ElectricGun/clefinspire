@@ -36,6 +36,4 @@ Route::post('/register/post', [RegisterController::class, 'submit']);
 Route::get('/userprofile', [UserProfileController::class, 'show']);
 Route::get('/courses/musictheory', [CoursesController::class, 'show_music_theory']);
 Route::get('/courses/eartraining', [CoursesController::class, 'show_ear_training']);
-
-
 Route::get('/search', [SearchController::class, 'search']);
