@@ -14,7 +14,7 @@ class HomeController extends Controller
         $user = ClefinspireAuth::get_user();
 
         if ($user === null) {
-            return redirect("/");
+            return redirect("/landing");
         }  
 
         foreach ($user as $u) {
