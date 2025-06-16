@@ -48,7 +48,7 @@ class RegisterController extends Controller
         // $user->email = $request->email;
         // $user->name = $request->name;
         $user->save();
-
+        
         if (Auth::attempt($validated)) {
 
             // DB::table('User')->insert([

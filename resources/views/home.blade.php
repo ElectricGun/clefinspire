@@ -39,17 +39,34 @@
                             <div class="card bg-pal-red border-2 rounded-4 border-dark home-card w-100 h-100">
                                 <h5 class="fw-bold px-3 pt-3 m-0 text-light">Learning Streak</h5>
                                 <div class="text-center px-3 mt-4">
-                                    <span class="fw-bold text-light" style="font-size: 50px">
-                                        <i class="bi bi-lightning-charge-fill"></i>
-                                        <span>{{ $p->user_learning_streak }}</span>
-                                    </span>
-                                    <span class="text-light fw-bold">
-                                        Day{{ $p->user_learning_streak != 1 ? 's' : '' }}
-                                    </span>
+                                    @if($streakData && $streakData['has_streak'])
+                                        {{-- User has a streak --}}
+                                        <span class="fw-bold text-light" style="font-size: 50px">
+                                            <i class="bi bi-lightning-charge-fill"></i>
+                                            <span>{{ $streakData['streak_count'] }}</span>
+                                        </span>
+                                        <span class="text-light fw-bold">
+                                            Day{{ $streakData['streak_count'] != 1 ? 's' : '' }}
+                                        </span>
+                                    @elseif($streakData && !$streakData['has_streak'])
+                                        {{-- User has no streak - show motivational message --}}
+                                        <div class="text-light">
+                                            <i class="bi bi-calendar-plus" style="font-size: 30px"></i>
+                                            <p class="mt-2 small">{{ $streakData['message'] }}</p>
+                                        </div>
+                                    @else
+                                        {{-- Fallback to original display --}}
+                                        <span class="fw-bold text-light" style="font-size: 50px">
+                                            <i class="bi bi-lightning-charge-fill"></i>
+                                            <span>{{ $p->user_learning_streak }}</span>
+                                        </span>
+                                        <span class="text-light fw-bold">
+                                            Day{{ $p->user_learning_streak != 1 ? 's' : '' }}
+                                        </span>
+                                    @endif
                                 </div>
                             </div>
                         </div>
-
                     </div>
 
                     {{-- Continue Learning Section --}}
