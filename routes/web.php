@@ -34,7 +34,8 @@ Route::post('/logout', [LogoutController::class, 'logout'])->name('logout');
 Route::get('/register', [RegisterController::class, 'show']);
 Route::post('/register/post', [RegisterController::class, 'submit']);
 
-Route::get('/userprofile', [UserProfileController::class, 'show']);
+Route::get('/userprofile', [UserProfileController::class, 'show'])->name('userprofile');
+Route::post('/userprofile/update', [UserProfileController::class, 'update'])->name('profile.update');
 Route::get('/courses/musictheory', [CoursesController::class, 'show_music_theory']);
 Route::get('/courses/eartraining', [CoursesController::class, 'show_ear_training']);
 Route::get('/search', [SearchController::class, 'search']);

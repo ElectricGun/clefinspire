@@ -1,5 +1,7 @@
 <?php
 
+// File: app/Http/Controllers/UserProfileController.php
+
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
@@ -8,24 +10,13 @@ use Illuminate\Support\Facades\DB;
 
 class UserProfileController extends Controller
 {
+    // Menampilkan halaman profil pengguna
     public function show(Request $request)
     {
-
-        $user_id_query = $request->get('user_id');
-        $user_id = $user_id_query;
-
+        // Mendapatkan data user yang sedang login
         $user = Auth::user();
 
-        if ($user_id_query !== null) {
-            $user = DB::table('Account')
-            ->where('id', '=', $user_id)
-            ->first();
-        }
-
-        if (!$user) {
-            return view('userprofile', ['user' => null]);
-        }
-
+        // Mengambil data profil pengguna
         $profileData = DB::table('Account')
             ->where('Account.id', $user->id)
             ->leftJoin('User', 'User.account_id', '=', 'Account.id')
@@ -45,6 +36,7 @@ class UserProfileController extends Controller
             )
             ->first();
 
+        // Mengambil badges jika ada
         $badges = DB::table('UserBadge')
             ->where('user_id', $profileData->user_id ?? null)
             ->join('Badges', 'Badges.badge_id', '=', 'UserBadge.badge_id')
@@ -54,10 +46,46 @@ class UserProfileController extends Controller
 
         return view('userprofile', [
             'user' => $profileData,
-            'badges' => $badges,
-            'user_id_query' => $user_id_query
-            // dont return original user, kinda unsafe
-            // 'originalUser' => $user
+            'badges' => $badges
         ]);
     }
+
+    // Memperbarui profil pengguna (nama, bio, gambar profil)
+    public function update(Request $request)
+    {
+        $user = Auth::user();
+
+        // Validasi input
+        $validated = $request->validate([
+            'display_name' => 'required|string|max:255',
+            'bio' => 'nullable|string|max:500',
+            'profile_picture' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        ]);
+
+        // Update nama dan bio
+        DB::table('DisplayProfile')
+            ->where('user_id', $user->id)
+            ->update([
+                'display_name' => $validated['display_name'],
+                'bio' => $validated['bio'],
+            ]);
+
+        // Jika ada gambar profil yang di-upload
+        if ($request->hasFile('profile_picture')) {
+            // Menentukan path penyimpanan dengan folder berdasarkan account_id dan user_id
+            $accountId = $user->id; 
+            $userId = $user->id;
+            $imagePath = $request->file('profile_picture')->store("accounts/$accountId/users/$userId/assets", 'public');
+
+            // Update gambar profil di tabel DisplayProfile
+            DB::table('DisplayProfile')
+                ->where('user_id', $user->id)
+                ->update(['profile_picture' => $imagePath]);
+        }
+
+        // Redirect kembali ke halaman profil dengan pesan sukses
+        return redirect()->route('userprofile')->with('success', 'Profile updated successfully');
+    }
 }
+
+
