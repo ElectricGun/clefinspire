@@ -5,41 +5,44 @@
 </style>
 
 @foreach ($user as $p)
-    <div class="container">
-        <div class="row mt-4 d-flex justify-content-between">
-            <div class="col-4">
-                <h2>{{isset($pagetitle) ? $pagetitle : '<ERR PAGE NAME UNSET>'}}</h2>
-            </div>
+    <div class="sticky-xxl-top">
+        <div class="container bg-white">
+            <div class="row d-flex justify-content-between pt-4">
+                <div class="col-4">
+                    <h2>{{ isset($pagetitle) ? $pagetitle : '<ERR PAGE NAME UNSET>' }}</h2>
+                </div>
 
-            <div class="col-md-4 col-md-4 py-4 px-0 d-none d-md-block">
-                @include('partials.searchbar')
-            </div>
+                <div class="col-md-4 col-md-4 py-4 px-0 d-none d-md-block">
+                    @include('partials.searchbar')
+                </div>
 
-            <div class="col-8 col-md-4">
-                <a href="../userprofile" class="text-decoration-none text-dark">
-                    <div class="row d-flex justify-content-end align-items-center">
-                        <div class="col-7 text-end">
-                            <h4>Beginner</h4>
-                            <h5 class="text-muted">Level {{ $p->user_level }}</h5>
-                        </div>
-                        <div class="col-auto d-flex align-items-center">
-                            <div class="card rounded-circle overflow-hidden" style="width: 75px; height: 75px;">
-                                <img src="https://picsum.photos/200" class="img-fluid w-100 h-100 object-fit-cover" alt="Profile image">
+                <div class="col-8 col-md-4">
+                    <a href="../userprofile" class="text-decoration-none text-dark">
+                        <div class="row d-flex justify-content-end align-items-center">
+                            <div class="col-7 text-end" style="direction: rtl">
+                                <h4>Beginner</h4>
+                                <h5 class="text-muted">Level&nbsp;{{ $p->user_level }}</h5>
+                            </div>
+                            <div class="col-auto align-items-center d-none d-xl-flex">
+                                <div class="card rounded-circle overflow-hidden" style="width: 75px; height: 75px;">
+                                    <img src="https://picsum.photos/id/{{$p->id}}/200" class="img-fluid w-100 h-100 object-fit-cover"
+                                        alt="Profile image">
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </a>
+                    </a>
+                </div>
             </div>
-        </div>
 
 
 
-        <div class="row d-flex justify-content-center d-block d-md-none">
-            <div class="col-6 py-4 px-0">
-                @include('partials.searchbar')
+            <div class="row d-flex justify-content-center d-block d-md-none">
+                <div class="col-6 py-4 px-0">
+                    @include('partials.searchbar')
+                </div>
             </div>
-        </div>
 
-        <hr class="mt-2 border-3">
+            <hr class="mt-2 border-3">
+        </div>
     </div>
 @endforeach
