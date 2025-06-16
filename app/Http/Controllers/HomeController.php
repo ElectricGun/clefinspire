@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Auth\ClefinspireAuth;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use App\Models\Streak;
 
 class HomeController extends Controller
 {
@@ -40,10 +41,27 @@ class HomeController extends Controller
                     $u->user_id
                 ]
             );
+            $streakData = null;
+            $userId = $u->user_id;
+            
+            $hasStreak = Streak::checkHasStreak($userId);
+            
+            if ($hasStreak) {
+                $streakData = [
+                    'streak_count' => Streak::getUserStreak($userId),
+                    'has_streak' => true
+                ];
+            } else {
+                $streakData = [
+                    'has_streak' => false,
+                    'message' => Streak::getMotivationalMessage()
+                ];
+            }
 
             return view('home', [
                 'user' => $user,
-                'userlessons' => $userlessons
+                'userlessons' => $userlessons,
+                'streakData' => $streakData
             ]);
         }
     }
