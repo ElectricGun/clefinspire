@@ -25,8 +25,8 @@
                             </div>
                             <div class="col-auto align-items-center d-none d-xl-flex">
                                 <div class="card rounded-circle overflow-hidden" style="width: 75px; height: 75px;">
-                                    <img src="https://picsum.photos/id/{{$p->id}}/200" class="img-fluid w-100 h-100 object-fit-cover"
-                                        alt="Profile image">
+                                    <img src="{{ asset('storage/' . (isset($display_profile) ? $display_profile->profile_picture : '#')) }}" onerror="this.src='/images/blank_profile.png'" alt="Profile Picture"
+                                        class="img-fluid w-100 h-100 object-fit-cover" alt="Profile image">
                                 </div>
                             </div>
                         </div>

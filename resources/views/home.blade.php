@@ -5,7 +5,7 @@
         <div class="container mb-5">
 
             {{-- Navbar --}}
-            @include('partials.navbar', ['user' => $user, 'pagetitle' => 'Home'])
+            @include('partials.navbar', ['user' => $user, 'display_profile' => $display_profile, 'pagetitle' => "Home"])
 
             {{-- Welcome Message --}}
             <div class="row text-center">
@@ -52,7 +52,7 @@
                                         {{-- User has no streak - show motivational message --}}
                                         <div class="text-light">
                                             <i class="bi bi-calendar-plus" style="font-size: 30px"></i>
-                                            <p class="mt-2 small">{{ $streakData['message'] }}</p>
+                                            <p class="mt-2 fw-bold">{{ $streakData['message'] }}</p>
                                         </div>
                                     @else
                                         {{-- Fallback to original display --}}

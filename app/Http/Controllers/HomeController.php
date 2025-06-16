@@ -6,6 +6,7 @@ use App\Http\Controllers\Auth\ClefinspireAuth;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use App\Models\Streak;
+use App\Providers\UserProfileProvider;
 
 class HomeController extends Controller
 {
@@ -13,6 +14,7 @@ class HomeController extends Controller
     {
 
         $user = ClefinspireAuth::get_user();
+        $display_profile = UserProfileProvider::get_user_profile($user->last()->user_id);
 
         if ($user === null) {
             return redirect("/landing");
@@ -61,7 +63,8 @@ class HomeController extends Controller
             return view('home', [
                 'user' => $user,
                 'userlessons' => $userlessons,
-                'streakData' => $streakData
+                'streakData' => $streakData,
+                'display_profile' => $display_profile
             ]);
         }
     }
