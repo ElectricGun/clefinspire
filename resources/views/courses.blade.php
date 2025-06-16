@@ -40,14 +40,14 @@
                                     </div>
 
                                     <div class = "col-6 text-end">
-                                        {{-- <span class="text-muted">{{ $lesson->progress * 100 . '%' }}
-                                            Complete</span>
+                                        <div class="text-muted mb-5">{{ $course->progress * 100 . '%' }}
+                                            Complete</div>
                                         <div class="progress mt-3 border border-dark rounded-5" style="min-height: 20px;">
                                             <div class="progress-bar bg-pal-red rounded-5 border border-dark"
-                                                role="progressbar" style="width: {{ $lesson->progress * 100 }}%; "
-                                                aria-valuenow={{ $lesson->progress * 100 }} aria-valuemin="0"
+                                                role="progressbar" style="width: {{ $course->progress * 100 }}%; "
+                                                aria-valuenow={{ $course->progress * 100 }} aria-valuemin="0"
                                                 aria-valuemax="100"></div>
-                                        </div> --}}
+                                        </div>
                                     </div>
                                 </div>
                             </div>

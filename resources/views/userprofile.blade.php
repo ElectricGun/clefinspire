@@ -57,13 +57,14 @@
                 </div>
 
                 <h2 class="mb-1">{{ $user->display_name ?? $user->name }}</h2>
+                <h5 class="mb-1 text-muted">{{ $user->display_name !== null ? $user->name : "" }}</h5>
 
                 @if ($user->bio ?? false)
-                    <p class="text-muted mb-2">{{ $user->bio }}</p>
+                    <p class="text-muted mb-2 mt-3">{{ $user->bio }}</p>
                 @endif
             </div>
 
-            <hr class="mt-0 mb-4">
+            <hr class="mt-3 mb-4">
 
             @if ($user->id == Auth::user()->id)
                 <!-- Menu Section -->
@@ -135,7 +136,7 @@
                             </div>
 
                             <div class="mb-3">
-                                <label for="display_name" class="form-label">Full Name</label>
+                                <label for="display_name" class="form-label">Display Name</label>
                                 <input type="text" class="form-control" id="display_name" name="display_name"
                                     value="{{ old('display_name', $user->display_name) }}">
                             </div>

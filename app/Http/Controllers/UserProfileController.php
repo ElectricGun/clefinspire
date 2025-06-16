@@ -18,7 +18,7 @@ class UserProfileController extends Controller
         $user_id = $request->get('user_id');
 
         if ($user_id === null) {
-            $user_id = Auth::user();
+            $user_id = Auth::user()->id;
         }
 
         // Mengambil data profil pengguna
@@ -62,7 +62,7 @@ class UserProfileController extends Controller
 
         // Validasi input
         $validated = $request->validate([
-            'display_name' => 'required|string|max:255',
+            'display_name' => 'nullable|string|max:255',
             'bio' => 'nullable|string|max:500',
             'profile_picture' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);

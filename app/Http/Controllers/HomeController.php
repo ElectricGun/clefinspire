@@ -12,13 +12,13 @@ class HomeController extends Controller
 {
     public function show()
     {
-
         $user = ClefinspireAuth::get_user();
-        $display_profile = UserProfileProvider::get_user_profile($user->last()->user_id);
 
         if ($user === null) {
             return redirect("/landing");
-        }  
+        }
+        
+        $display_profile = UserProfileProvider::get_user_profile($user->last()->user_id);
 
         foreach ($user as $u) {
             $userlessons = DB::select(
@@ -26,7 +26,7 @@ class HomeController extends Controller
             SELECT l.title, SUM(uqs.is_completed) / COUNT(uqs.is_completed) as progress from UserQuestionStatus uqs 
             JOIN UserCourse uc ON uc.user_id = ?
             JOIN UserLessonStatus uls ON uls.user_id = uc.user_id AND uls.course_id = uc.course_id
-            JOIN Lesson l on uls.lesson_id = l.lesson_id
+            JOIN Lesson l on uls.lesson_id = l.lesson_id    
             WHERE uqs.task_id = (
                 SELECT uts.task_id FROM UserTaskStatus uts
                 WHERE uts.lesson_id = (
