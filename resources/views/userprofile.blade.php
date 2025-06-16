@@ -101,7 +101,6 @@
                 <i class="bi bi-chevron-right text-danger"></i>
             </div>
         </a>
-    </div>
 
     <!-- Logout Confirmation Form -->
     <form id="logoutForm" action="{{ route('logout') }}" method="POST" class="mb-0" style="display: none;">
