@@ -48,7 +48,7 @@ class UserProfileController extends Controller
             ->select('Badges.*', 'UserBadge.time_acquired')
             ->orderBy('UserBadge.time_acquired', 'desc')
             ->get();
-
+        
         return view('userprofile', [
             'user' => $profileData,
             'badges' => $badges

@@ -18,7 +18,7 @@ class HomeController extends Controller
             return redirect("/landing");
         }
         
-        $display_profile = UserProfileProvider::get_user_profile($user->last()->user_id);
+        $display_profile = UserProfileProvider::get_user_profile($user->last()->account_id);
 
         foreach ($user as $u) {
             $userlessons = DB::select(

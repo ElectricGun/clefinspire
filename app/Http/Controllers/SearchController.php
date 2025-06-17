@@ -66,7 +66,7 @@ class SearchController extends Controller
         }
 
         $user = ClefinspireAuth::get_user();
-        $display_profile = UserProfileProvider::get_user_profile($user->last()->user_id);
+        $display_profile = UserProfileProvider::get_user_profile($user->last()->account_id);
         return view('search', ['query' => $query, 'user' => $user, 'users_get' => $users_get, 'display_profile' => $display_profile, 'courses_get' => $courses_get]);
     }
 }

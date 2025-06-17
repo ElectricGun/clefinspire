@@ -24,11 +24,11 @@ class UserProfileProvider extends ServiceProvider
         //
     }
 
-    public static function get_user_profile($user_id) {
+    public static function get_user_profile($account_id) {
 
         $display_profile = DB::table('User', 'u')
         ->join('DisplayProfile', 'DisplayProfile.user_id', '=', 'u.user_id')
-        ->where('u.account_id', '=', $user_id)
+        ->where('u.account_id', '=', $account_id)
         ->get()->last();
 
         return $display_profile;

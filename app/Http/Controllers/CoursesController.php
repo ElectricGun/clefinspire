@@ -11,7 +11,7 @@ class CoursesController extends Controller
     public function show_music_theory()
     {
         $user = ClefinspireAuth::get_user();
-        $display_profile = UserProfileProvider::get_user_profile($user->last()->user_id);
+        $display_profile = UserProfileProvider::get_user_profile($user->last()->account_id);
 
         foreach ($user as $u) {
             $courses = DB::select(
@@ -48,7 +48,7 @@ class CoursesController extends Controller
     public function show_ear_training()
     {
         $user = ClefinspireAuth::get_user();
-        $display_profile = UserProfileProvider::get_user_profile($user->last()->user_id);
+        $display_profile = UserProfileProvider::get_user_profile($user->last()->account_id);
         
         foreach ($user as $u) {
             $courses = DB::select(
