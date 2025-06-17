@@ -32,7 +32,7 @@
                 <div class="row d-flex justify-content-center">
                     <div class="col-8">
                         @foreach ($courses as $course)
-                            <a href="{{$coursetype}}/{{$course->course_id}}" class = "card border-2 rounded-4 mt-3 pt-3 px-3 pb-2">
+                            <a href="{{$coursetype}}/{{$course->course_id}}" class = "card border-2 rounded-4 mt-3 pt-3 px-3 pb-2 text-decoration-none">
                                 <div class = "row">
                                     <div class = "col-6">
                                         <h2 class="text-muted"> {{ $course->course_name }} </h2>
