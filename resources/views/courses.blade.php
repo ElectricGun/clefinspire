@@ -1,11 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
+@extends('layouts.main', ['page' => $coursetype])
+
+@section('title')
+    Clefinspire - {{$coursetitle}}
+@endsection
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>$coursetitle</title>
-
     <style>
         .main-content {
             padding: 20px;
@@ -19,7 +18,6 @@
 </head>
 
 <body>
-    @extends('layouts.main', ['page' => $coursetype])
 
     @section('content')
         @include('partials.navbar', [

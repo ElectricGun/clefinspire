@@ -1,5 +1,9 @@
 @extends('layouts.main', ['page' => 'search'])
 
+@section('title') Clefinspire - Search: {{$query}} @endsection
+
+
+
 @section('content')
     @include('partials.navbar', ['user' => $user, 'pagetitle' => 'Search', 'query' => $query, 'display_profile' => $display_profile])
 
