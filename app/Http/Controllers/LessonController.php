@@ -23,8 +23,8 @@ class LessonController extends Controller
             left join Lesson l on l.course_id = c.course_id
             left join Task t on t.lesson_id = l.lesson_id
             left join UserLessonStatus uls on uls.lesson_id = l.lesson_id and uls.user_id = ?
-            left join UserTaskStatus uts on uts.task_id = uts.task_id and uls.user_id = ?
-            left join UserQuestionStatus uqs on uqs.question_id = uqs.question_id and uls.user_id = ?
+            left join UserTaskStatus uts on uts.task_id = uts.task_id and uts.user_id = ?
+            left join UserQuestionStatus uqs on uqs.question_id = uqs.question_id and uqs.user_id = ?
             where c.course_type = '$coursetype'
             and l.course_id = ?
             and l.lesson_id = ?
