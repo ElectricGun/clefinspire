@@ -1,5 +1,7 @@
 @extends('layouts.main', ['page' => 'sus'])
 
+@section('title') Clefinspire - User: {{$user->name}} @endsection
+
 @section('content')
 
     <body>

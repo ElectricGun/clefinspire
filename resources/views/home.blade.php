@@ -1,5 +1,10 @@
 @extends('layouts.main', ['page' => 'home'])
 
+@section('title')
+    Clefinspire - Home
+@endsection
+
+
 @section('content')
     @foreach ($user as $p)
         <div class="container mb-5">
