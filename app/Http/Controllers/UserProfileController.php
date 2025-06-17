@@ -73,8 +73,7 @@ class UserProfileController extends Controller
         // Jika ada gambar profil yang di-upload
         if ($request->hasFile('profile_picture')) {
             // Menentukan path penyimpanan dengan folder berdasarkan account_id dan user_id
-            $accountId = $user->id; 
-            $userId = $user->id;
+            $accountId = $account->id;
             $imagePath = $request->file('profile_picture')->store("accounts/$accountId/users/$userId/assets", 'public');
 
             // Update gambar profil di tabel DisplayProfile
