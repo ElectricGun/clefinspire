@@ -1,5 +1,9 @@
 @extends('layouts.auth')
 
+<title> 
+    Clefinspire - Sign In
+</title>
+
 @section('content')
     <style>
         body {
