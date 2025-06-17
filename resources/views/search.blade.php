@@ -1,7 +1,7 @@
 @extends('layouts.main', ['page' => 'search'])
 
 @section('content')
-    @include('partials.navbar', ['user' => $user, 'pagetitle' => 'Search', 'query' => $query])
+    @include('partials.navbar', ['user' => $user, 'pagetitle' => 'Search', 'query' => $query, 'display_profile' => $display_profile])
 
 
     <div class="container">
@@ -51,7 +51,7 @@
                                             <div class="col-auto d-flex align-items-top">
                                                 <div class="card rounded-circle overflow-hidden"
                                                     style="width: 75px; height: 75px;">
-                                                    <img src="https://picsum.photos/id/{{ $u->id }}/200"
+                                                    <img src="{{ asset('storage/' . (isset($u) ? $u->profile_picture : '#')) }}" onerror="this.src='/images/blank_profile.png'" alt="Profile Picture"
                                                         class="img-fluid w-100 h-100 object-fit-cover" alt="Profile image">
                                                 </div>
                                             </div>

@@ -26,6 +26,6 @@ class Streak extends Model
     
     public static function getMotivationalMessage()
     {
-        return "Start your learning journey today! 🎵";
+        return "Start your learning journey today!";
     }
 }

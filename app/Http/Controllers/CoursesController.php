@@ -4,46 +4,83 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Auth\ClefinspireAuth;
 use Illuminate\Support\Facades\DB;
+use App\Providers\UserProfileProvider;
 
 class CoursesController extends Controller
 {
     public function show_music_theory()
     {
         $user = ClefinspireAuth::get_user();
-
+        $display_profile = UserProfileProvider::get_user_profile($user->last()->user_id);
 
         foreach ($user as $u) {
-            $userlessons = DB::select(
+            $courses = DB::select(
                 "
-            SELECT l.title, SUM(uqs.is_completed) / COUNT(uqs.is_completed) as progress from UserQuestionStatus uqs 
-            JOIN UserCourse uc ON uc.user_id = ?
-            JOIN UserLessonStatus uls ON uls.user_id = uc.user_id AND uls.course_id = uc.course_id
-            JOIN Lesson l on uls.lesson_id = l.lesson_id
-            WHERE uqs.task_id = (
-                SELECT uts.task_id FROM UserTaskStatus uts
-                WHERE uts.lesson_id = (
-                    SELECT uls.lesson_id  FROM UserCourse uc 
-                    JOIN UserLessonStatus uls ON uls.user_id = uc.user_id AND uls.course_id = uc.course_id
-                    WHERE uc.user_id = ?
-                )
-                AND uts.is_completed = 0
-            )
-            GROUP BY l.title, uqs.task_id
-            ",
+select c.difficulty, c.course_name, c.course_id, coalesce(sum(uts.is_completed) / count(t.task_id), 0) as progress
+from Course c 
+left join UserCourse uc on c.course_id = uc.course_id and user_id = ?
+left join Lesson l on l.course_id = c.course_id
+left join Task t on t.lesson_id = l.lesson_id
+left join UserLessonStatus uls on uls.course_id = uc.course_id
+left join UserTaskStatus uts on uls.lesson_id = uts.course_id
+where c.course_type = 'musictheory'
+group by c.course_type, c.difficulty, c.course_name, c.course_id
+having count(t.task_id) > 0
+
+                ",
                 [
-                    $u->user_id,
                     $u->user_id
                 ]
             );
 
-            return view('musictheory', ['user' => $user, 'coursetype' => 'musictheory', 'coursetitle' => 'Music Theory', 'userlessons' => $userlessons]);
+            return view(
+                'courses',
+                [
+                    'user' => $user,
+                    'courses' => $courses,
+                    'display_profile' => $display_profile,
+                    'coursetype' => 'musictheory',
+                    'coursetitle' => 'Music Theory'
+                ]
+            );
+        }
     }
-}
 
     public function show_ear_training()
     {
         $user = ClefinspireAuth::get_user();
+        $display_profile = UserProfileProvider::get_user_profile($user->last()->user_id);
+        
+        foreach ($user as $u) {
+            $courses = DB::select(
+                "
+select c.difficulty, c.course_name, c.course_id, coalesce(sum(uts.is_completed) / count(t.task_id), 0) as progress
+from Course c 
+left join UserCourse uc on c.course_id = uc.course_id and user_id = ?
+left join Lesson l on l.course_id = c.course_id
+left join Task t on t.lesson_id = l.lesson_id
+left join UserLessonStatus uls on uls.course_id = uc.course_id
+left join UserTaskStatus uts on uls.lesson_id = uts.course_id
+where c.course_type = 'eartraining'
+group by c.course_type, c.difficulty, c.course_name, c.course_id
+having count(t.task_id) > 0
 
-        return view('courses', ['user' => $user, 'coursetype' => 'eartraining', 'coursetitle' => 'Ear Training' ]);
+                ",
+                [
+                    $u->user_id
+                ]
+            );
+
+            return view(
+                'courses',
+                [
+                    'user' => $user,
+                    'courses' => $courses,
+                    'display_profile' => $display_profile,
+                    'coursetype' => 'eartraining',
+                    'coursetitle' => 'Ear Training'
+                ]
+            );
+        }
     }
 }
