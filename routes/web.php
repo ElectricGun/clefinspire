@@ -6,10 +6,10 @@ use App\Http\Controllers\CoursesController;
 use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LandingController;
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\MusicTheoryController;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\UserProfileController;
+use App\Http\Controllers\AccountController;
+use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -35,11 +35,8 @@ Route::post('/logout', [LogoutController::class, 'logout'])->name('logout');
 Route::get('/register', [RegisterController::class, 'show']);
 Route::post('/register/post', [RegisterController::class, 'submit']);
 
-Route::get('/userprofile', [UserProfileController::class, 'show']);
-Route::get('/courses/musictheory', [MusicTheoryController::class, 'show']);
-
+Route::get('/userprofile', [UserProfileController::class, 'show'])->name('userprofile');
+Route::post('/userprofile/update', [UserProfileController::class, 'update'])->name('profile.update');
 Route::get('/courses/musictheory', [CoursesController::class, 'show_music_theory']);
 Route::get('/courses/eartraining', [CoursesController::class, 'show_ear_training']);
-
 Route::get('/search', [SearchController::class, 'search']);
-Route::post('/logout', [LogoutController::class, 'logout'])->name('logout');

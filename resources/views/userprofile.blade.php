@@ -4,7 +4,6 @@
 
     <body>
 
-
         <!-- Header Section -->
         <div class="header d-flex justify-content-between align-items-center p-3 bg-white shadow-sm mb-4 position-relative">
             <div class="logo d-flex align-items-center">
@@ -14,6 +13,14 @@
             <div class="fs-5 position-absolute start-50 translate-middle-x">User Profile</div>
             <div style="width: 100px;"></div>
         </div>
+
+        <!-- Menampilkan pesan sukses dengan tanda silang untuk menutup -->
+        @if (session('success'))
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                {{ session('success') }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        @endif
 
         @if ($user !== null)
             <!-- Profile Section -->
@@ -31,19 +38,10 @@
                     @endif
 
                     <div class="avatar">
-                        @if ($user->profile_picture ?? false)
-                            <img src="{{ $user->profile_picture }}" alt="Profile Picture"
-                                class="rounded-circle border border-3 border-dark"
-                                style="width: 150px; height: 150px; object-fit: cover;">
-                        @else
-                            {{-- <div class="rounded-circle bg-pal-red d-flex align-items-center justify-content-center border border-3 border-dark" 
-                         style="width: 150px; height: 150px; font-size: 3rem;">
-                        {{ substr($user->display_name ?? $user->name, 0, 1) }}
-                    </div> --}}
-                            <img src="https://picsum.photos/id/{{ $user->id }}/200" alt="Profile Picture"
-                                class="rounded-circle border border-3 border-dark"
-                                style="width: 150px; height: 150px; object-fit: cover;">
-                        @endif
+                        <img src="{{ asset('storage/' . $user->profile_picture) }}"
+                            onerror="this.src='/images/blank_profile.png'" alt="Profile Picture"
+                            class="rounded-circle border border-3 border-dark"
+                            style="width: 150px; height: 150px; object-fit: cover;">
                     </div>
 
                     @if ($badges->count() > 1)
@@ -59,13 +57,14 @@
                 </div>
 
                 <h2 class="mb-1">{{ $user->display_name ?? $user->name }}</h2>
+                <h5 class="mb-1 text-muted">{{ $user->display_name !== null ? $user->name : "" }}</h5>
 
                 @if ($user->bio ?? false)
-                    <p class="text-muted mb-2">{{ $user->bio }}</p>
+                    <p class="text-muted mb-2 mt-3">{{ $user->bio }}</p>
                 @endif
             </div>
 
-            <hr class="mt-0 mb-4">
+            <hr class="mt-3 mb-4">
 
             @if ($user->id == Auth::user()->id)
                 <!-- Menu Section -->
@@ -78,7 +77,8 @@
                         </div>
                     </a>
 
-                    <a href="#" class="text-decoration-none text-dark">
+                    <a href="#" class="text-decoration-none text-dark" data-bs-toggle="modal"
+                        data-bs-target="#customizeModal">
                         <div
                             class="d-flex justify-content-between align-items-center p-3 border border-1 border-danger rounded mb-4 hover-bg-light">
                             <span>Customize</span>
@@ -118,6 +118,45 @@
             </div>
         @endif
 
+        <!-- Modal Customize -->
+        <div class="modal fade" id="customizeModal" tabindex="-1" aria-labelledby="customizeModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="customizeModalLabel">Customize Profile</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <!-- Form untuk mengupdate profil -->
+                        <form method="POST" action="{{ route('profile.update') }}" enctype="multipart/form-data">
+                            @csrf
+                            <div class="mb-3">
+                                <label for="profile_picture" class="form-label">Profile Picture</label>
+                                <input type="file" class="form-control" id="profile_picture" name="profile_picture">
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="display_name" class="form-label">Display Name</label>
+                                <input type="text" class="form-control" id="display_name" name="display_name"
+                                    value="{{ old('display_name', $user->display_name) }}">
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="bio" class="form-label">Bio</label>
+                                <textarea class="form-control" id="bio" name="bio" rows="3">{{ old('bio', $user->bio) }}</textarea>
+                            </div>
+
+                            <div class="d-flex justify-content-between">
+                                <button type="submit" class="btn btn-primary">Save Profile</button>
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
     </body>
+
 @endsection

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Auth\ClefinspireAuth;
+use App\Providers\UserProfileProvider;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -53,7 +54,8 @@ class SearchController extends Controller
                     'a.name',
                     'u.user_level',
                     'dp.display_name',
-                    'a.id'
+                    'a.id',
+                    'dp.profile_picture'
                 ]);
         }
 
@@ -64,7 +66,7 @@ class SearchController extends Controller
         }
 
         $user = ClefinspireAuth::get_user();
-
-        return view('search', ['query' => $query, 'user' => $user, 'users_get' => $users_get, 'courses_get' => $courses_get]);
+        $display_profile = UserProfileProvider::get_user_profile($user->last()->user_id);
+        return view('search', ['query' => $query, 'user' => $user, 'users_get' => $users_get, 'display_profile' => $display_profile, 'courses_get' => $courses_get]);
     }
 }
