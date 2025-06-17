@@ -8,7 +8,11 @@
     <div class="container bg-white">
         <div class="row d-flex justify-content-between pt-4">
             <div class="{{!(isset($search_enabled) && $search_enabled === false) ? 'col-4' : 'col-8'}}">
-                <h2>{{ isset($pagetitle) ? $pagetitle : '<ERR PAGE NAME UNSET>' }}</h2>
+                @yield('pagetitle')
+
+                @if(isset($pagetitle) && !(isset($disable_default_title) && $disable_default_title === true))
+                <h2>{{$pagetitle}}</h2>
+                @endif
             </div>
 
             @if (!(isset($search_enabled) && $search_enabled === false))
@@ -19,7 +23,7 @@
 
 
             <div class="col-8 col-md-4">
-                <a href="../userprofile" class="text-decoration-none text-dark">
+                <a href="/userprofile" class="text-decoration-none text-dark">
                     <div class="row d-flex justify-content-end align-items-center">
                         <div class="col-7 text-end" style="direction: rtl">
                             <h4>Beginner</h4>

@@ -1,7 +1,7 @@
 @extends('layouts.main', ['page' => $coursetype])
 
 @section('title')
-    Clefinspire - {{$pagetitle}}
+    Clefinspire - {{ $pagetitle }}
 @endsection
 
 <head>
@@ -19,21 +19,28 @@
 
 <body>
 
+    @section('pagetitle')
+        <a class="h2 text-decoration-none" href="/courses/{{ $coursetype }}">{{ $pagetitle }}</a>
+        <span class="h2"> - </span>
+        <a class="h2 text-decoration-none" href="{{ $courseid }}">{{$course_name}}</a>
+    @endsection
+
     @section('content')
         @include('partials.navbar', [
             'user' => $user,
             'display_profile' => $display_profile,
-            'pagetitle' => ($pagetitle . " - " . $course_name),
+            'disable_default_title' => true,
             'search_enabled' => false
         ])
-        
+
         <div class="main-content">
             <div class="container">
 
                 <div class="row d-flex justify-content-center">
                     <div class="col-8">
                         @foreach ($lessons as $lesson)
-                            <div class = "card border-2 rounded-4 mt-3 pt-3 px-3 pb-2">
+                            <a class = "card border-2 rounded-4 mt-3 pt-3 px-3 pb-2 text-decoration-none"
+                                href="{{ $courseid }}/{{ $lesson->lesson_id }}">
                                 <div class = "row">
                                     <div class = "col-6">
                                         <h2 class="text-muted"> {{ $lesson->title }} </h2>
@@ -50,7 +57,7 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </a>
                         @endforeach
                     </div>
                 </div>

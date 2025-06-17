@@ -7,7 +7,7 @@ use App\Providers\UserProfileProvider;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
-class LessonsController extends Controller
+class CoursePageController extends Controller
 {
     public static function show(Request $request, $courseid, $coursetype, $pagetitle)
     {
@@ -33,23 +33,24 @@ class LessonsController extends Controller
             ]
         );
 
-        return view('lessons', [
+        return view('coursepage', [
             'pagetitle' => $pagetitle,
             'course_name' => ($lessons[0]->course_name),
             'user' => $user,
             'display_profile' => $display_profile,
             'lessons' => $lessons,
             'coursetype' => $coursetype,
+            'courseid' => $courseid
         ]);
     }
 
-    public function show_music_theory(Request $request, $lesson)
+    public function show_music_theory(Request $request, $courseid)
     {
-        return LessonsController::show($request, $lesson, 'musictheory', 'Music Theory');
+        return CoursePageController::show($request, $courseid, 'musictheory', 'Music Theory');
     }
 
-    public function show_ear_training(Request $request, $lesson)
+    public function show_ear_training(Request $request, $courseid)
     {
-        return LessonsController::show($request, $lesson, 'eartraining', 'Ear Training');
+        return CoursePageController::show($request, $courseid, 'eartraining', 'Ear Training');
     }
 }

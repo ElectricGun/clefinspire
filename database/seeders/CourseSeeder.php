@@ -14,7 +14,7 @@ class CourseSeeder extends Seeder
     public function run(): void
     {
         $course_name = "SeededCourse3";
-        $course_type = "theory";
+        $course_type = "musictheory";
 
         DB::table('Course')->insert([
             'difficulty' => 1,
@@ -23,10 +23,10 @@ class CourseSeeder extends Seeder
         ]);
 
         $course_id = DB::table('Course')
-        ->where('course_name', '=', $course_name)
-        ->where('course_type', '=', $course_type)
-        ->orderBy('course_id', 'desc')
-        ->first()->course_id;
+            ->where('course_name', '=', $course_name)
+            ->where('course_type', '=', $course_type)
+            ->orderBy('course_id', 'desc')
+            ->first()->course_id;
 
         // Lesson
 
@@ -41,9 +41,9 @@ class CourseSeeder extends Seeder
             ]);
 
             $lesson_id = DB::table('Lesson')
-            ->where('title', '=', $lesson_title)
-            ->orderBy('lesson_id', 'desc')
-            ->first()->lesson_id;
+                ->where('title', '=', $lesson_title)
+                ->orderBy('lesson_id', 'desc')
+                ->first()->lesson_id;
 
             // Task
 
@@ -52,11 +52,11 @@ class CourseSeeder extends Seeder
 
             $previous_task_id = null;
 
-            $create_task = function($title, $preq = null) use (&$task_xp, &$lesson_id, &$previous_task_id) {
-                
+            $create_task = function ($title, $preq = null) use (&$task_xp, &$lesson_id, &$previous_task_id) {
+
                 // because circular dependency
                 DB::statement('SET FOREIGN_KEY_CHECKS = 0;');
-                
+
                 DB::table('Task')->insert([
                     'title' => $title,
                     'task_completion_xp_reward' => $task_xp,
@@ -65,10 +65,10 @@ class CourseSeeder extends Seeder
                 ]);
 
                 $previous_task_id = DB::table('Task')
-                ->where('title', '=', $title)
-                ->where('lesson_id', '=', $lesson_id)
-                ->orderBy('task_id', 'desc')
-                ->first()->task_id;
+                    ->where('title', '=', $title)
+                    ->where('lesson_id', '=', $lesson_id)
+                    ->orderBy('task_id', 'desc')
+                    ->first()->task_id;
 
                 if ($preq !== null) {
                     DB::table('TaskPrerequisites')->insert([
@@ -82,15 +82,42 @@ class CourseSeeder extends Seeder
 
                 for ($q = 0; $q < 10; $q++) {
                     $question_title = "Question" . $q + 1;
-                    $is_text = true;
-                    $answer_text = "test";
 
-                    DB::table('Question')->insert([
-                        'title' => $question_title,
-                        'task_id' => $previous_task_id,
-                        'answer_text' => $answer_text,
-                        'is_text_question_flag' => $is_text
-                    ]);
+                    if ($q % 2 == 0) {
+                        $is_text = true;
+                        $answer_text = "test";
+
+                        DB::table('Question')->insert([
+                            'title' => $question_title,
+                            'task_id' => $previous_task_id,
+                            'answer_text' => $answer_text,
+                            'is_text_question_flag' => $is_text
+                        ]);
+                    } else {
+                        $is_text = false;
+                        $answer_id = 0;
+
+                        DB::table('Question')->insert([
+                            'title' => $question_title,
+                            'task_id' => $previous_task_id,
+                            'answer_id' => $answer_id,
+                            'is_text_question_flag' => $is_text
+                        ]);
+
+                        $question_id = DB::table('Question')
+                        ->where('title', '=', $question_title)
+                        ->orderBy('question_id', 'desc')
+                        ->first()->question_id;
+
+                        for ($c = 0; $c < 4; $c++) {
+                            DB::table('QuestionChoice')->insert([
+                                'choice_number' => $c,
+                                'description' => "Choice",
+                                'question_id' => $question_id,
+                                'text_size' => 1
+                            ]);
+                        }
+                    }
                 }
             };
 
@@ -100,7 +127,6 @@ class CourseSeeder extends Seeder
                 $task_title = "Task " . $t + 1;
 
                 $create_task($task_title, $previous_task_id);
-
             }
         }
     }
