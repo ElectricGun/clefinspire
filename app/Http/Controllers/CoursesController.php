@@ -23,14 +23,15 @@ class CoursesController extends Controller
             left join Task t on t.lesson_id = l.lesson_id
             left join UserLessonStatus uls on uls.lesson_id = l.lesson_id and uls.user_id = ? 
             left join UserTaskStatus uts on uts.task_id = t.task_id and uts.user_id = ?
-            where c.course_type = '$coursetype'
+            where c.course_type = ?
             group by c.course_type, c.difficulty, c.course_name, c.course_id
             having count(t.task_id) > 0
                 ",
             [
                 $user->user_id,
                 $user->user_id,
-                $user->user_id
+                $user->user_id,
+                $coursetype
             ]
         );
 

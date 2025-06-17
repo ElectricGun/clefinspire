@@ -22,14 +22,14 @@ class HomeController extends Controller
 
         $userlessons = DB::select(
             "
-            select c.course_name, l.lesson_id, l.title, l.lesson_completion_xp_reward, coalesce(sum(uts.is_completed) / count(t.task_id), 0) as progress
+            select c.course_id, c.course_type, l.lesson_id, l.title, l.lesson_completion_xp_reward, coalesce(sum(uts.is_completed) / count(t.task_id), 0) as progress
             from Course c 
             left join UserCourse uc on c.course_id = uc.course_id and user_id = ?
             left join Lesson l on l.course_id = c.course_id
             left join Task t on t.lesson_id = l.lesson_id
             left join UserLessonStatus uls on uls.lesson_id = l.lesson_id and uls.user_id = ?
             left join UserTaskStatus uts on uts.task_id = t.task_id and uts.user_id = ?
-            group by c.course_name, l.lesson_id, l.title, l.lesson_completion_xp_reward
+            group by c.course_id, c.course_type, l.lesson_id, l.title, l.lesson_completion_xp_reward
             having progress > 0 and progress < 1
             ",
             [

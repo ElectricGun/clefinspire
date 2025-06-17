@@ -38,7 +38,7 @@ class LessonController extends Controller
             left join UserLessonStatus uls on uls.lesson_id = l.lesson_id and uls.user_id = ? 
             left join UserTaskStatus uts on uts.task_id = t.task_id and uts.user_id = ?
             left join UserQuestionStatus uqs on uqs.question_id = q.question_id and uqs.user_id = ?
-            where c.course_type = '$coursetype' 
+            where c.course_type = ?
             and l.course_id = ?
             and l.lesson_id = ?
             group by prerequisite_completed, uts.is_completed,
@@ -51,8 +51,9 @@ class LessonController extends Controller
                 $user->user_id,
                 $user->user_id,
                 $user->user_id,
+                $coursetype,
                 $courseid,
-                $lessonid
+                $lessonid,
             ]
         );
 
