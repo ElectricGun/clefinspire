@@ -23,7 +23,8 @@
         @include('partials.navbar', [
             'user' => $user,
             'display_profile' => $display_profile,
-            'pagetitle' => $pagetitle,
+            'pagetitle' => ($pagetitle . " - " . $course_name),
+            'search_enabled' => false
         ])
         
         <div class="main-content">
@@ -31,25 +32,25 @@
 
                 <div class="row d-flex justify-content-center">
                     <div class="col-8">
-                        @foreach ($courses as $course)
-                            <a href="{{$coursetype}}/{{$course->course_id}}" class = "card border-2 rounded-4 mt-3 pt-3 px-3 pb-2">
+                        @foreach ($lessons as $lesson)
+                            <div class = "card border-2 rounded-4 mt-3 pt-3 px-3 pb-2">
                                 <div class = "row">
                                     <div class = "col-6">
-                                        <h2 class="text-muted"> {{ $course->course_name }} </h2>
+                                        <h2 class="text-muted"> {{ $lesson->title }} </h2>
                                     </div>
 
                                     <div class = "col-6 text-end">
-                                        <div class="text-muted mb-5">{{ $course->progress * 100 . '%' }}
+                                        <div class="text-muted mb-5">{{ $lesson->progress * 100 . '%' }}
                                             Complete</div>
                                         <div class="progress mt-3 border border-dark rounded-5" style="min-height: 20px;">
                                             <div class="progress-bar bg-pal-red rounded-5 border border-dark"
-                                                role="progressbar" style="width: {{ $course->progress * 100 }}%; "
-                                                aria-valuenow={{ $course->progress * 100 }} aria-valuemin="0"
+                                                role="progressbar" style="width: {{ $lesson->progress * 100 }}%; "
+                                                aria-valuenow={{ $lesson->progress * 100 }} aria-valuemin="0"
                                                 aria-valuemax="100"></div>
                                         </div>
                                     </div>
                                 </div>
-                            </a>
+                            </div>
                         @endforeach
                     </div>
                 </div>
