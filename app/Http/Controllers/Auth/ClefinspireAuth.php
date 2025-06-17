@@ -23,7 +23,7 @@ class ClefinspireAuth extends Controller {
             ->join('User', 'User.account_id', '=', 'Account.id')
             ->join('DisplayProfile', 'DisplayProfile.user_id', '=', 'User.user_id')
             ->select('Account.*', 'User.*', 'DisplayProfile.*')
-            ->get();
+            ->get()->last();
         
         return $user;
     }

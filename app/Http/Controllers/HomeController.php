@@ -17,13 +17,12 @@ class HomeController extends Controller
         if ($user === null) {
             return redirect("/landing");
         }
-        
-        $display_profile = UserProfileProvider::get_user_profile($user->last()->user_id);
 
-        foreach ($user as $u) {
-            $userlessons = DB::select(
-                // query can be simplified
-                "
+        $display_profile = UserProfileProvider::get_user_profile($user->account_id);
+
+        $userlessons = DB::select(
+            // query can be simplified
+            "
                 SELECT l.title, SUM(uqs.is_completed) / COUNT(uqs.is_completed) as progress from UserQuestionStatus uqs 
                 JOIN UserCourse uc ON uc.user_id = ?
                 JOIN UserLessonStatus uls ON uls.user_id = uc.user_id AND uls.course_id = uc.course_id
@@ -39,34 +38,33 @@ class HomeController extends Controller
                 )
                 GROUP BY l.title, uqs.task_id
                 ",
-                [
-                    $u->user_id,
-                    $u->user_id
-                ]
-            );
-            $streakData = null;
-            $userId = $u->user_id;
-            
-            $hasStreak = Streak::checkHasStreak($userId);
-            
-            if ($hasStreak) {
-                $streakData = [
-                    'streak_count' => Streak::getUserStreak($userId),
-                    'has_streak' => true
-                ];
-            } else {
-                $streakData = [
-                    'has_streak' => false,
-                    'message' => Streak::getMotivationalMessage()
-                ];
-            }
+            [
+                $user->user_id,
+                $user->user_id
+            ]
+        );
+        $streakData = null;
+        $userId = $user->user_id;
 
-            return view('home', [
-                'user' => $user,
-                'userlessons' => $userlessons,
-                'streakData' => $streakData,
-                'display_profile' => $display_profile
-            ]);
+        $hasStreak = Streak::checkHasStreak($userId);
+
+        if ($hasStreak) {
+            $streakData = [
+                'streak_count' => Streak::getUserStreak($userId),
+                'has_streak' => true
+            ];
+        } else {
+            $streakData = [
+                'has_streak' => false,
+                'message' => Streak::getMotivationalMessage()
+            ];
         }
+
+        return view('home', [
+            'user' => $user,
+            'userlessons' => $userlessons,
+            'streakData' => $streakData,
+            'display_profile' => $display_profile
+        ]);
     }
 }

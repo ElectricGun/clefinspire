@@ -62,7 +62,7 @@
 
                                             <div class="col overflow-hidden">
                                                 <span class="h2 text-muted">
-                                                    {{ $u->display_name !== null ? $u->display_name : $u->name }}
+                                                    {{ $u->display_name !== null ? $u->display_name : "@" . $u->name }}
                                                 </span>
                                             </div>
                                         </div>
