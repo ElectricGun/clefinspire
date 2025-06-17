@@ -22,12 +22,14 @@ class CoursePageController extends Controller
             left join UserCourse uc on c.course_id = uc.course_id and user_id = ?
             left join Lesson l on l.course_id = c.course_id
             left join Task t on t.lesson_id = l.lesson_id
-            left join UserLessonStatus uls on uls.course_id = uc.course_id
-            left join UserTaskStatus uts on uls.lesson_id = uts.course_id
+            left join UserLessonStatus uls on uls.lesson_id = l.lesson_id and uls.user_id = ? 
+            left join UserTaskStatus uts on uts.task_id = t.task_id and uts.user_id = ?
             where c.course_type = '$coursetype' and l.course_id = ?
             group by c.course_name, l.lesson_id, l.title, l.lesson_completion_xp_reward
             ",
             [
+                $user->user_id,
+                $user->user_id,
                 $user->user_id,
                 $courseid
             ]
