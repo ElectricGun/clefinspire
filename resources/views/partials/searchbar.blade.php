@@ -6,10 +6,25 @@
     </div>
 </form>
 
-<hr class="mt-1 border-3">
+<style> 
+
+    @keyframes animation-drop {
+        0% {transform: translateY(-50px)};
+        100% {transform: translateY(0px)};
+    }
+
+    #tooltips {
+        background: #ffffff;
+        animation-name: animation-drop;
+        animation-duration: .5s;
+        z-index: 100;
+    }
+</style>
+
+<hr class="mt-1 mb-0 border-3">
 <div id="tooltips" class="mt-5 text-muted" style="display: none;"> <span class="h5 text-dark"> Available filters
     </span>
-    <hr class="my-1">
+    <hr  id="tooltips-text" class="my-1">
     Filter users using&nbsp;<span class="text-reset fw-bold"> user: </span> <br>
     Filter courses using&nbsp;<span class="text-reset fw-bold"> course: </span> <br>
     Separate queries with&nbsp;pipe&nbsp;<span class="text-reset fw-bold"> | </span>
