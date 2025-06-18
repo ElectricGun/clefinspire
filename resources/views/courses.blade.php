@@ -8,6 +8,7 @@
     <style>
         .main-content {
             padding: 20px;
+            padding-bottom: 380px;
             width: 100%;
         }
 
@@ -18,21 +19,17 @@
 </head>
 
 <body>
-
     @section('pagetitle')
         <a class="h2 text-decoration-none" href="/courses/{{ $coursetype }}">{{$pagetitle}}</a>
     @endsection
-
     @section('content')
         @include('partials.navbar', [
             'user' => $user,
             'display_profile' => $display_profile,
             'disable_default_title' => true
         ])
-        
         <div class="main-content">
             <div class="container">
-
                 <div class="row d-flex justify-content-center">
                     <div class="col-8">
                         @foreach ($courses as $course)
@@ -60,8 +57,7 @@
             </div>
         </div>
         </div>
+        @include('partials.level')
     @endsection
-
 </body>
-
 </html>

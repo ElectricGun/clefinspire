@@ -4,7 +4,6 @@
     Clefinspire - Home
 @endsection
 
-
 @section('content')
     <div class="container mb-5">
 

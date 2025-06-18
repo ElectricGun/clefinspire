@@ -104,4 +104,6 @@
             </div>
         </div>
     </div>
+    @include('partials.level')
+
 @endsection
