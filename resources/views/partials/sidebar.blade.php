@@ -1,5 +1,5 @@
 <div class="col-auto px-0 bg-gradient-pal-red">
-    <div id="sidebar" class="collapse collapse-horizontal show border-end">
+    <div id="sidebar" class="collapse collapse-horizontal border-end {{isset($sidebar_start_collapsed) && $sidebar_start_collapsed === true ? '' : 'show'}}">
         <div id="sidebar-nav" class="list-group border-0 rounded-0 text-sm-start min-vh-100 p-0" style="min-width: 360px">
 
             <div class="container">
