@@ -1,5 +1,9 @@
 @extends('layouts.main', ['page' => 'search'])
 
+@section('title') Clefinspire - Search: {{$query}} @endsection
+
+
+
 @section('content')
     @include('partials.navbar', ['user' => $user, 'pagetitle' => 'Search', 'query' => $query, 'display_profile' => $display_profile])
 
@@ -11,7 +15,7 @@
                 @if (($courses_get !== null && count($courses_get) > 0 || $users_get !== null && count($users_get) > 0))
                     @if ($courses_get !== null)
                         @foreach ($courses_get as $c)
-                            <a class="card border-2 rounded-4 mt-3 pt-3 px-3 pb-2 text-decoration-none" href="#">
+                            <a class="card border-2 rounded-4 mt-3 pt-3 px-3 pb-2 text-decoration-none" href="/courses/{{$c->course_type}}/{{$c->course_id}}">
                                 <div class="row align-items-top mb-3">
                                     <div class="col-6">
                                         <div class="row">
@@ -58,7 +62,7 @@
 
                                             <div class="col overflow-hidden">
                                                 <span class="h2 text-muted">
-                                                    {{ $u->display_name !== null ? $u->display_name : $u->name }}
+                                                    {{ $u->display_name !== null ? $u->display_name : "@" . $u->name }}
                                                 </span>
                                             </div>
                                         </div>

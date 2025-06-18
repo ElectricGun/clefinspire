@@ -1,5 +1,7 @@
 @extends('layouts.main', ['page' => 'sus'])
 
+@section('title') Clefinspire - User: {{$user->name}} @endsection
+
 @section('content')
 
     <body>
@@ -56,8 +58,8 @@
                     @endif
                 </div>
 
-                <h2 class="mb-1">{{ $user->display_name ?? $user->name }}</h2>
-                <h5 class="mb-1 text-muted">{{ $user->display_name !== null ? $user->name : "" }}</h5>
+                <h2 class="mb-1">{{ $user->display_name ?? "@" . $user->name }}</h2>
+                <h5 class="mb-1 text-muted">{{ $user->display_name !== null ? "@" . $user->name : "" }}</h5>
 
                 @if ($user->bio ?? false)
                     <p class="text-muted mb-2 mt-3">{{ $user->bio }}</p>
