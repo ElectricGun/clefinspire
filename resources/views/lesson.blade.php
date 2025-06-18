@@ -21,9 +21,9 @@
 
     @section('pagetitle')
         <a class="h2 text-decoration-none" href="/courses/{{ $coursetype }}">{{ $pagetitle }}</a>
-        <span class="h2"> - </span>
+        <span class="h2">&nbsp;-&nbsp;</span>
         <a class="h2 text-decoration-none" href="/courses/{{ $coursetype }}/{{ $courseid }}">{{ $course_name }}</a>
-        <span class="h2"> - </span>
+        <span class="h2">&nbsp;-&nbsp;</span>
         <a class="h2 text-decoration-none" href="{{ $lessonid }}">{{ $lesson_title }}</a>
     @endsection
 
@@ -43,7 +43,7 @@
                         @foreach ($tasks as $task)
                             @if ($task->prerequisite_completed || $task->is_completed)
                                 <a class = "card border-2 rounded-4 mt-3 pt-3 px-3 pb-2 text-decoration-none" style="min-height: 120px"
-                                    href="#">
+                                    href="{{$lessonid}}/{{$task->task_id}}">
                                     <div class = "row">
                                         <div class = "col-6">
                                             <h2 class="text-muted"> {{ $task->task_title }} </h2>

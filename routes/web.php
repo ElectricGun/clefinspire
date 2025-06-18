@@ -12,6 +12,7 @@ use App\Http\Controllers\AccountController;
 use App\Http\Controllers\CoursePageController;
 use App\Http\Controllers\LessonController;
 use App\Http\Controllers\LessonsController;
+use App\Http\Controllers\TaskController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -51,3 +52,6 @@ Route::get('/courses/eartraining/{courseid}', [CoursePageController::class, 'sho
 
 Route::get('/courses/musictheory/{courseid}/{lessonid}', [LessonController::class, 'show_music_theory']);
 Route::get('/courses/eartraining/{courseid}/{lessonid}', [LessonController::class, 'show_ear_training']);
+
+Route::get('/courses/musictheory/{courseid}/{lessonid}/{taskid}', [TaskController::class, 'show_music_theory']);
+Route::get('/courses/eartraining/{courseid}/{lessonid}/{taskid}', [TaskController::class, 'show_ear_training']);

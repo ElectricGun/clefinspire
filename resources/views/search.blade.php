@@ -7,7 +7,6 @@
 @section('content')
     @include('partials.navbar', ['user' => $user, 'pagetitle' => 'Search', 'query' => $query, 'display_profile' => $display_profile])
 
-
     <div class="container">
         <div class="row d-flex justify-content-center mt-3 align-items-stretch">
             <div class="col-12 col-md-10 col-lg-8">
