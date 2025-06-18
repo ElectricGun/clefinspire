@@ -33,7 +33,6 @@ class UserProfileController extends Controller
                 'User.user_id',
                 'User.user_learning_streak',
                 'User.user_xp',
-                'User.user_level',
                 'DisplayProfile.display_name',
                 'DisplayProfile.bio',
                 'DisplayProfile.profile_picture',

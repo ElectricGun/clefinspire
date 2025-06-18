@@ -54,9 +54,9 @@ class SearchController extends Controller
                 ->orwhere('dp.display_name', 'REGEXP', implode("|", $user_terms))
                 ->get([
                     'a.name',
-                    'u.user_level',
                     'dp.display_name',
                     'a.id',
+                    'u.user_xp',
                     'dp.profile_picture'
                 ]);
         }
