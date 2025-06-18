@@ -9,7 +9,10 @@ use App\Http\Controllers\LandingController;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\UserProfileController;
 use App\Http\Controllers\AccountController;
+use App\Http\Controllers\CoursePageController;
+use App\Http\Controllers\LessonController;
 use App\Http\Controllers\LessonsController;
+use App\Http\Controllers\TaskController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -44,5 +47,11 @@ Route::get('/courses/eartraining', [CoursesController::class, 'show_ear_training
 
 Route::get('/search', [SearchController::class, 'search']);
 
-Route::get('/courses/musictheory/{lesson}', [LessonsController::class, 'show_music_theory']);
-Route::get('/courses/eartraining/{lesson}', [LessonsController::class, 'show_ear_training']);
+Route::get('/courses/musictheory/{courseid}', [CoursePageController::class, 'show_music_theory']);
+Route::get('/courses/eartraining/{courseid}', [CoursePageController::class, 'show_ear_training']);
+
+Route::get('/courses/musictheory/{courseid}/{lessonid}', [LessonController::class, 'show_music_theory']);
+Route::get('/courses/eartraining/{courseid}/{lessonid}', [LessonController::class, 'show_ear_training']);
+
+Route::get('/courses/musictheory/{courseid}/{lessonid}/{taskid}', [TaskController::class, 'show_music_theory']);
+Route::get('/courses/eartraining/{courseid}/{lessonid}/{taskid}', [TaskController::class, 'show_ear_training']);

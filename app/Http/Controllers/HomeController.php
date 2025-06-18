@@ -21,24 +21,19 @@ class HomeController extends Controller
         $display_profile = UserProfileProvider::get_user_profile($user->account_id);
 
         $userlessons = DB::select(
-            // query can be simplified
             "
-                SELECT l.title, SUM(uqs.is_completed) / COUNT(uqs.is_completed) as progress from UserQuestionStatus uqs 
-                JOIN UserCourse uc ON uc.user_id = ?
-                JOIN UserLessonStatus uls ON uls.user_id = uc.user_id AND uls.course_id = uc.course_id
-                JOIN Lesson l on uls.lesson_id = l.lesson_id    
-                WHERE uqs.task_id = (
-                    SELECT uts.task_id FROM UserTaskStatus uts
-                    WHERE uts.lesson_id = (
-                        SELECT uls.lesson_id  FROM UserCourse uc 
-                        JOIN UserLessonStatus uls ON uls.user_id = uc.user_id AND uls.course_id = uc.course_id
-                        WHERE uc.user_id = ?
-                    )
-                    AND uts.is_completed = 0
-                )
-                GROUP BY l.title, uqs.task_id
-                ",
+            select c.course_id, c.course_type, l.lesson_id, l.title, l.lesson_completion_xp_reward, coalesce(sum(uts.is_completed) / count(t.task_id), 0) as progress
+            from Course c 
+            left join UserCourse uc on c.course_id = uc.course_id and user_id = ?
+            left join Lesson l on l.course_id = c.course_id
+            left join Task t on t.lesson_id = l.lesson_id
+            left join UserLessonStatus uls on uls.lesson_id = l.lesson_id and uls.user_id = ?
+            left join UserTaskStatus uts on uts.task_id = t.task_id and uts.user_id = ?
+            group by c.course_id, c.course_type, l.lesson_id, l.title, l.lesson_completion_xp_reward
+            having progress > 0 and progress < 1
+            ",
             [
+                $user->user_id,
                 $user->user_id,
                 $user->user_id
             ]

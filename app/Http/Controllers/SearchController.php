@@ -20,24 +20,26 @@ class SearchController extends Controller
 
         foreach ($terms as $term) {
             $search_term = trim(preg_replace('/(\s|^)user:|(\s|^)course:/', "", $term));
-            $filter_term = trim(preg_replace('/' . $search_term . '/', "", $term));
+            $filter_term = trim(explode(":", $term)[0]);
 
-            switch ($filter_term) {
-                default:
-                    array_push($user_terms, $search_term);
-                    array_push($course_terms, $search_term);
-                    break;
-                case "user:":
-                    array_push($user_terms, $search_term);
-                    break;
-                case "course:":
-                    array_push($course_terms, $search_term);
-                    break;
+            if ($search_term === "" && $filter_term !== "" || $search_term !== "") {
+                switch ($filter_term) {
+                    case "user":
+                        array_push($user_terms, $search_term);
+                        break;
+                    case "course":
+                        array_push($course_terms, $search_term);
+                        break;
+                    default:
+                        array_push($user_terms, $search_term);
+                        array_push($course_terms, $search_term);
+                        break;
+                }
             }
         }
 
-        $user_terms =  array_filter(array_unique($user_terms), 'strlen');
-        $course_terms = array_filter(array_unique($course_terms), 'strlen');
+        // $user_terms =  array_filter(array_unique($user_terms), 'strlen');
+        // $course_terms = array_filter(array_unique($course_terms), 'strlen');
 
         $users_get = null;
         $courses_get = null;
@@ -52,9 +54,9 @@ class SearchController extends Controller
                 ->orwhere('dp.display_name', 'REGEXP', implode("|", $user_terms))
                 ->get([
                     'a.name',
-                    'u.user_level',
                     'dp.display_name',
                     'a.id',
+                    'u.user_xp',
                     'dp.profile_picture'
                 ]);
         }

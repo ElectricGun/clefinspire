@@ -33,4 +33,17 @@ class UserProfileProvider extends ServiceProvider
 
         return $display_profile;
     }
+
+    public static function calculate_level($user_xp) {
+        return floor($user_xp / 100);
+    }
+
+    public static function calculate_skill($level) {
+        return match (true) {
+            $level <= 9 => 'Beginner',
+            $level <= 34 => 'Intermediate',
+            $level <= 99 => 'Advanced',
+            $level >= 100 => 'Virtuoso'
+        };
+    }
 }

@@ -7,7 +7,7 @@ use App\Providers\UserProfileProvider;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
-class LessonsController extends Controller
+class CoursePageController extends Controller
 {
     public static function show(Request $request, $courseid, $coursetype, $pagetitle)
     {
@@ -22,34 +22,38 @@ class LessonsController extends Controller
             left join UserCourse uc on c.course_id = uc.course_id and user_id = ?
             left join Lesson l on l.course_id = c.course_id
             left join Task t on t.lesson_id = l.lesson_id
-            left join UserLessonStatus uls on uls.course_id = uc.course_id
-            left join UserTaskStatus uts on uls.lesson_id = uts.course_id
-            where c.course_type = '$coursetype' and l.course_id = ?
+            left join UserLessonStatus uls on uls.lesson_id = l.lesson_id and uls.user_id = ? 
+            left join UserTaskStatus uts on uts.task_id = t.task_id and uts.user_id = ?
+            where c.course_type = ? and l.course_id = ?
             group by c.course_name, l.lesson_id, l.title, l.lesson_completion_xp_reward
             ",
             [
                 $user->user_id,
+                $user->user_id,
+                $user->user_id,
+                $coursetype,
                 $courseid
             ]
         );
 
-        return view('lessons', [
+        return view('coursepage', [
             'pagetitle' => $pagetitle,
             'course_name' => ($lessons[0]->course_name),
             'user' => $user,
             'display_profile' => $display_profile,
             'lessons' => $lessons,
             'coursetype' => $coursetype,
+            'courseid' => $courseid
         ]);
     }
 
-    public function show_music_theory(Request $request, $lesson)
+    public function show_music_theory(Request $request, $courseid)
     {
-        return LessonsController::show($request, $lesson, 'musictheory', 'Music Theory');
+        return CoursePageController::show($request, $courseid, 'musictheory', 'Music Theory');
     }
 
-    public function show_ear_training(Request $request, $lesson)
+    public function show_ear_training(Request $request, $courseid)
     {
-        return LessonsController::show($request, $lesson, 'eartraining', 'Ear Training');
+        return CoursePageController::show($request, $courseid, 'eartraining', 'Ear Training');
     }
 }

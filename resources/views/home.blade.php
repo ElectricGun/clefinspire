@@ -84,7 +84,7 @@
                 @if (count($userlessons) > 0)
                     <div class="card border-2 rounded-4 mt-3 pt-3 px-3 pb-2">
                         @foreach ($userlessons as $lesson)
-                            <div class="row align-items-center mb-3">
+                            <a class="row align-items-center mb-3 text-decoration-none" href="courses/{{$lesson->course_type}}/{{$lesson->course_id }}/{{ $lesson->lesson_id }}">
                                 <div class="col-6">
                                     <span class="text-muted">{{ $lesson->title }}</span>
                                 </div>
@@ -100,7 +100,7 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </a>
                         @endforeach
                     </div>
                 @else

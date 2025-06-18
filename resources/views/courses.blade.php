@@ -19,11 +19,15 @@
 
 <body>
 
+    @section('pagetitle')
+        <a class="h2 text-decoration-none" href="/courses/{{ $coursetype }}">{{$pagetitle}}</a>
+    @endsection
+
     @section('content')
         @include('partials.navbar', [
             'user' => $user,
             'display_profile' => $display_profile,
-            'pagetitle' => $pagetitle,
+            'disable_default_title' => true
         ])
         
         <div class="main-content">

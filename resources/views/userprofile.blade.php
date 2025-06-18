@@ -1,6 +1,12 @@
+@php
+    use App\Providers\UserProfileProvider;
+@endphp
+
 @extends('layouts.main', ['page' => 'sus'])
 
-@section('title') Clefinspire - User: {{$user->name}} @endsection
+@section('title')
+    Clefinspire - User: {{ $user->name }}
+@endsection
 
 @section('content')
 
@@ -27,6 +33,10 @@
         @if ($user !== null)
             <!-- Profile Section -->
             <div class="profile-section text-center">
+
+                <h2 class="mb-1">{{ $user->display_name ?? '@' . $user->name }}</h2>
+                <h5 class="mb-3 text-muted">{{ $user->display_name !== null ? '@' . $user->name : '' }}</h5>
+
                 <div class="d-flex justify-content-center align-items-center mb-3 position-relative">
                     @if ($badges->count() > 0)
                         <div class="position-absolute d-flex flex-column align-items-center"
@@ -58,12 +68,18 @@
                     @endif
                 </div>
 
-                <h2 class="mb-1">{{ $user->display_name ?? "@" . $user->name }}</h2>
-                <h5 class="mb-1 text-muted">{{ $user->display_name !== null ? "@" . $user->name : "" }}</h5>
+                <h4>{{ UserProfileProvider::calculate_skill(UserProfileProvider::calculate_level($user->user_xp)) }}</h4>
+                <h5 class="mb-4 text-muted">Level&nbsp;{{ UserProfileProvider::calculate_level($user->user_xp) }}</h5>
+
 
                 @if ($user->bio ?? false)
-                    <p class="text-muted mb-2 mt-3">{{ $user->bio }}</p>
+                    <div class="row d-flex justify-content-center">
+                        <p class="col-4 py-3 text-muted mb-4 mt-3 card border-1">{{ $user->bio }}</p>
+                    </div>
                 @endif
+
+
+
             </div>
 
             <hr class="mt-3 mb-4">
