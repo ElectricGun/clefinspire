@@ -4,9 +4,8 @@
     Clefinspire - Home
 @endsection
 
-
 @section('content')
-    <div class="container mb-5">
+    <div class="container mb-5 d-flex flex-column min-vh-100">
 
         {{-- Navbar --}}
         @include('partials.navbar', [
@@ -110,4 +109,6 @@
             </div>
         </div>
     </div>
+    @include('partials.level')
+
 @endsection

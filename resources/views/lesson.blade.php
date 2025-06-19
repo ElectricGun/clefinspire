@@ -36,14 +36,14 @@
         ])
 
         <div class="main-content">
-            <div class="container">
+            <div class="container mb-5 d-flex flex-column min-vh-100">
 
                 <div class="row d-flex justify-content-center">
                     <div class="col-8">
                         @foreach ($tasks as $task)
                             @if ($task->prerequisite_completed || $task->is_completed)
-                                <a class = "card border-2 rounded-4 mt-3 pt-3 px-3 pb-2 text-decoration-none" style="min-height: 120px"
-                                    href="{{$lessonid}}/{{$task->task_id}}">
+                                <a class = "card border-2 rounded-4 mt-3 pt-3 px-3 pb-2 text-decoration-none"
+                                    style="min-height: 120px" href="{{ $lessonid }}/{{ $task->task_id }}">
                                     <div class = "row">
                                         <div class = "col-6">
                                             <h2 class="text-muted"> {{ $task->task_title }} </h2>
@@ -51,20 +51,23 @@
 
 
                                         <div class = "col-6 text-end">
-                                            <div class="text-muted mb-5">{{ $task->is_completed === 1 ? 100 : $task->progress * 100 . '%' }}
+                                            <div class="text-muted mb-5">
+                                                {{ $task->is_completed === 1 ? 100 : $task->progress * 100 . '%' }}
                                                 Complete</div>
                                             <div class="progress mt-3 border border-dark rounded-5"
                                                 style="min-height: 20px;">
                                                 <div class="progress-bar bg-pal-red rounded-5 border border-dark"
-                                                    role="progressbar" style="width: {{ $task->is_completed === 1 ? 100 : $task->progress * 100 }}%; "
-                                                    aria-valuenow={{ $task->is_completed === 1 ? 100 : $task->progress * 100 }} aria-valuemin="0"
-                                                    aria-valuemax="100"></div>
+                                                    role="progressbar"
+                                                    style="width: {{ $task->is_completed === 1 ? 100 : $task->progress * 100 }}%; "
+                                                    aria-valuenow={{ $task->is_completed === 1 ? 100 : $task->progress * 100 }}
+                                                    aria-valuemin="0" aria-valuemax="100"></div>
                                             </div>
                                         </div>
                                     </div>
                                 </a>
                             @else
-                                <div class = "card border-2 rounded-4 mt-3 pt-3 px-3 pb-2 text-decoration-none" style="min-height: 120px; background: linear-gradient(to bottom, #ffffff, #CDCBCB);">
+                                <div class = "card border-2 rounded-4 mt-3 pt-3 px-3 pb-2 text-decoration-none"
+                                    style="min-height: 120px; background: linear-gradient(to bottom, #ffffff, #CDCBCB);">
                                     <div class = "row">
                                         <div class = "col-6">
                                             <h2 class="text-muted"> {{ $task->task_title }} </h2>
@@ -83,7 +86,7 @@
                 </div>
             </div>
         </div>
-        </div>
+        @include('partials.level')
     @endsection
 
 </body>
