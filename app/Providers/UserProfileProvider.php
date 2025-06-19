@@ -46,4 +46,15 @@ class UserProfileProvider extends ServiceProvider
             $level >= 100 => 'Virtuoso'
         };
     }
+
+    public static function calculate_remaining_xp($user_xp) {
+        $xp_for_next_level = 100; 
+        $current_level_xp = ($user_xp % $xp_for_next_level); 
+        return $xp_for_next_level - $current_level_xp;
+    }
+
+    public static function calculate_total_xp($level) {
+        $xp_for_next_level = 100; 
+        return $level * $xp_for_next_level;
+    }
 }

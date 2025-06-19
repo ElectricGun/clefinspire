@@ -1,8 +1,12 @@
+@php
+    use App\Providers\UserProfileProvider;
+@endphp
+
 <div class="sticky-xxl-bottom">
     <div class="container bg-white">
         <div class="row align-items-center py-2">
             <div class="col-4 text-start">
-                <h6 class="text-muted mb-0">Lv. {{ $user->user_level }}</h6>
+                <h6 class="text-muted mb-0">Lv. {{ UserProfileProvider::calculate_level($user->user_xp) }}</h6>
             </div>
             
             <div class="col-4">
@@ -19,7 +23,7 @@
             </div>
 
             <div class="col-4 text-end">
-                <h6 class="text-muted mb-0">Lv. {{ $user->user_level + 1 }}</h6>
+                <h6 class="text-muted mb-0">Lv. {{ UserProfileProvider::calculate_level($user->user_xp) + 1 }}</h6>
             </div>
         </div>
     </div>
