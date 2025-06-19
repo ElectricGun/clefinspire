@@ -8,6 +8,7 @@ use App\Providers\UserProfileProvider;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 
 class UserProfileController extends Controller
 {
@@ -100,7 +101,7 @@ class UserProfileController extends Controller
     // Verify user's password
     $request->validate([
         'password' => ['required', function ($attribute, $value, $fail) {
-            if (!\Hash::check($value, Auth::user()->password)) {
+            if (!Hash::check($value, Auth::user()->password)) {
                 $fail('The password is incorrect.');
             }
         }],
