@@ -1,5 +1,10 @@
 @extends('layouts.auth')
 
+<title> 
+    Clefinspire - Register
+</title>
+
+
 @section('content')
     <style>
         .footer {

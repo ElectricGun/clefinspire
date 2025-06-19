@@ -43,25 +43,27 @@ class RegisterController extends Controller
             ])->withInput();
         }
 
-        $user = new User();
-        $user->password = Hash::make($request->password);
-        $user->email = $request->email;
-        $user->name = $request->name;
+        $user = User::create($request->name, $request->email, $request->password);
+        // $user->password = Hash::make($request->password);
+        // $user->email = $request->email;
+        // $user->name = $request->name;
         $user->save();
-
+        
         if (Auth::attempt($validated)) {
 
-            DB::table('User')->insert([
-                'account_id' => Auth::user()->id
-            ]);
+            // DB::table('User')->insert([
+            //     'account_id' => Auth::user()->id
+            // ]);
 
-            $user_profile = DB::table('User')->where('account_id', '=', Auth::user()->id)->get();
+            // $user_profile = DB::table('User')->where('account_id', '=', Auth::user()->id)->get();
 
-            foreach ($user_profile as $up) {
-                DB::table('DisplayProfile')->insert([
-                    'user_id' => $up->user_id
-                ]);
-            }
+            // foreach ($user_profile as $up) {
+            //     DB::table('DisplayProfile')->insert([
+            //         'user_id' => $up->user_id
+            //     ]);
+            // }
+
+            User::create_display_data(Auth::user()->id);
 
             $request->session()->regenerate();
 

@@ -1,11 +1,11 @@
 <div class="col-auto px-0 bg-gradient-pal-red">
-    <div id="sidebar" class="collapse collapse-horizontal show border-end">
+    <div id="sidebar" class="collapse collapse-horizontal border-end {{isset($sidebar_start_collapsed) && $sidebar_start_collapsed === true ? '' : 'show'}}">
         <div id="sidebar-nav" class="list-group border-0 rounded-0 text-sm-start min-vh-100 p-0" style="min-width: 360px">
 
             <div class="container">
-                <div class="row">
+                <div class="row d-none d-xxl-flex">
                     <div class="col text-center py-5">
-                        <h2 class="text-nowrap"><span style="font-size: 100px"> &#119070 </span> Clefinspire </h2>
+                        <h2 class="text-nowrap"><span style="font-size: 100px"> <img class="img-fluid" src="/images/logo-small.png"> </span> Clefinspire </h2>
                     </div>
                 </div>
             </div>
