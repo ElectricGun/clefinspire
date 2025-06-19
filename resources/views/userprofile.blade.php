@@ -78,8 +78,6 @@
                     </div>
                 @endif
 
-
-
             </div>
 
             <hr class="mt-3 mb-4">
@@ -104,6 +102,14 @@
                         </div>
                     </a>
 
+                    <!-- Delete Account Button -->
+                    <a href="#" class="text-decoration-none text-dark" data-bs-toggle="modal" data-bs-target="#deleteAccountModal">
+                        <div class="d-flex justify-content-between align-items-center p-3 border border-1 border-danger rounded mb-4 hover-bg-light">
+                            <span class="text-danger">Delete Account</span>
+                            <i class="bi bi-chevron-right text-danger"></i>
+                        </div>
+                    </a>
+
                     <!-- Logout Button -->
                     <a href="#" onclick="confirmLogout()" class="text-decoration-none text-dark">
                         <div
@@ -121,6 +127,39 @@
                     @csrf
                     <button type="submit" id="logoutSubmit"></button>
                 </form>
+
+                <!-- Delete Account Modal -->
+                <div class="modal fade" id="deleteAccountModal" tabindex="-1" aria-labelledby="deleteAccountModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="deleteAccountModalLabel">Delete Account</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="alert alert-danger">
+                                    <strong>Warning!</strong> This action is permanent and cannot be undone. All your data will be deleted.
+                                </div>
+                                <p>Are you sure you want to delete your account?</p>
+                                
+                                <form id="deleteAccountForm" action="{{ route('profile.destroy') }}" method="POST">
+                                    @csrf
+                                    @method('DELETE')
+                                    
+                                    <div class="mb-3">
+                                        <label for="password" class="form-label">Enter your password to confirm:</label>
+                                        <input type="password" class="form-control" id="password" name="password" required>
+                                    </div>
+                                    
+                                    <div class="d-flex justify-content-between">
+                                        <button type="submit" class="btn btn-danger">Delete Account</button>
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
                 <script>
                     function confirmLogout() {

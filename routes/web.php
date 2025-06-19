@@ -29,7 +29,6 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [HomeController::class, 'show']);
 Route::get('/landing', [LandingController::class, 'show']);
 Route::get('/home', [HomeController::class, 'show']);
-Route::get('/landing', [LandingController::class, 'show']);
 
 Route::get('/signin', [SigninController::class, 'show']);
 Route::post('/signin/post', [SigninController::class, 'submit']);
@@ -41,6 +40,7 @@ Route::post('/register/post', [RegisterController::class, 'submit']);
 
 Route::get('/userprofile', [UserProfileController::class, 'show'])->name('userprofile');
 Route::post('/userprofile/update', [UserProfileController::class, 'update'])->name('profile.update');
+Route::delete('/userprofile/delete', [UserProfileController::class, 'destroy'])->name('profile.destroy');
 
 Route::get('/courses/musictheory', [CoursesController::class, 'show_music_theory']);
 Route::get('/courses/eartraining', [CoursesController::class, 'show_ear_training']);

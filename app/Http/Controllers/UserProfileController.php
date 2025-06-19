@@ -95,4 +95,37 @@ class UserProfileController extends Controller
         // Redirect kembali ke halaman profil dengan pesan sukses
         return redirect()->route('userprofile')->with('success', 'Profile updated successfully');
     }
+
+    public function destroy(Request $request) {
+    // Verify user's password
+    $request->validate([
+        'password' => ['required', function ($attribute, $value, $fail) {
+            if (!\Hash::check($value, Auth::user()->password)) {
+                $fail('The password is incorrect.');
+            }
+        }],
+    ]);
+
+    $account = Auth::user();
+    $accountId = $account->id;
+
+    // Get user ID
+    $userId = DB::table('User')
+        ->where('account_id', $accountId)
+        ->value('user_id');
+
+    DB::transaction(function () use ($userId, $accountId) {
+        DB::table('UserBadge')->where('user_id', $userId)->delete();
+        
+        DB::table('DisplayProfile')->where('user_id', $userId)->delete();
+        
+        DB::table('User')->where('user_id', $userId)->delete();
+        
+        DB::table('Account')->where('id', $accountId)->delete();
+    });
+
+    Auth::logout();
+    $request->session()->invalidate();
+    $request->session()->regenerateToken();
+}
 }
