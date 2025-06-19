@@ -20,7 +20,7 @@
         'display_profile' => $display_profile,
     ])
 
-    <div class="container">
+    <div class="container mb-5 d-flex flex-column min-vh-100">
         <div class="row d-flex justify-content-center mt-3 align-items-stretch">
             <div class="col-12 col-md-10 col-lg-8">
 
@@ -103,7 +103,7 @@
                 @endif
             </div>
         </div>
+        @include('partials.level')
     </div>
-    @include('partials.level')
 
 @endsection

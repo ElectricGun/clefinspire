@@ -22,7 +22,7 @@
     @section('pagetitle')
         <a class="h2 text-decoration-none" href="/courses/{{ $coursetype }}">{{ $pagetitle }}</a>
         <span class="h2"> - </span>
-        <a class="h2 text-decoration-none" href="{{ $courseid }}">{{$course_name}}</a>
+        <a class="h2 text-decoration-none" href="{{ $courseid }}">{{ $course_name }}</a>
     @endsection
 
     @section('content')
@@ -30,11 +30,11 @@
             'user' => $user,
             'display_profile' => $display_profile,
             'disable_default_title' => true,
-            'search_enabled' => false
+            'search_enabled' => false,
         ])
 
         <div class="main-content">
-            <div class="container">
+            <div class="container mb-5 d-flex flex-column min-vh-100">
 
                 <div class="row d-flex justify-content-center">
                     <div class="col-8">
@@ -62,7 +62,6 @@
                     </div>
                 </div>
             </div>
-        </div>
         </div>
         @include('partials.level')
     @endsection
