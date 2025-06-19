@@ -8,7 +8,7 @@
     <style>
         .main-content {
             padding: 20px;
-            padding-bottom: 380px;
+            padding-bottom: 400px;
             width: 100%;
         }
 

@@ -31,7 +31,7 @@
                     <div class="row d-flex justify-content-end align-items-center">
                         <div class="col-7 text-end" style="direction: rtl">
                             <h4>Beginner</h4>
-                            <h5 class="text-muted">Level&nbsp;{{ $user->user_level }}</h5>
+                            <h5 class="text-muted">Level&nbsp;{{ floor($user->user_xp / 100) }}</h5>
                         </div>
                         <div class="col-auto align-items-center d-none d-xl-flex">
                             <div class="card rounded-circle overflow-hidden" style="width: 75px; height: 75px;">
