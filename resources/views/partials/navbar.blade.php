@@ -1,3 +1,7 @@
+@php
+    use App\Providers\UserProfileProvider;
+@endphp
+
 <style>
     .no-outline:focus {
         border-style: none !important;
@@ -26,12 +30,12 @@
             @endif
 
 
-            <div class="col-4 col-md-4 order-2 order-md-3">
+            <div class="col-4 col-md-4 order-2 order-md-3 mb-4">
                 <a href="/userprofile" class="text-decoration-none text-dark">
                     <div class="row d-flex justify-content-end align-items-center">
                         <div class="col-7 text-end" style="direction: rtl">
-                            <h4>Beginner</h4>
-                            <h5 class="text-muted">Level&nbsp;{{ floor($user->user_xp / 100) }}</h5>
+                            <h4>{{ UserProfileProvider::calculate_skill(UserProfileProvider::calculate_level($user->user_xp)) }}</h4>
+                            <h5 class="text-muted">Level&nbsp;{{ UserProfileProvider::calculate_level($user->user_xp) }}</h5>
                         </div>
                         <div class="col-auto align-items-center d-none d-xl-flex">
                             <div class="card rounded-circle overflow-hidden" style="width: 75px; height: 75px;">

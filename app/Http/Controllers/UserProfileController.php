@@ -33,7 +33,6 @@ class UserProfileController extends Controller
                 'User.user_id',
                 'User.user_learning_streak',
                 'User.user_xp',
-                DB::raw('FLOOR(User.user_xp / 100) AS user_level'),
                 'DisplayProfile.display_name',
                 'DisplayProfile.bio',
                 'DisplayProfile.profile_picture',

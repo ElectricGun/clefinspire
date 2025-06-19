@@ -22,6 +22,8 @@ class TaskController extends Controller
     public static function show(Request $request, $courseid, $lessonid, $taskid, $coursetype, $pagetitle)
     {
 
+        $question_number = $request->get('q') ?? 0;
+
         // ADD SOME ISUNLOCKED VALIDATION
 
         $user = ClefinspireAuth::get_user();
@@ -32,7 +34,7 @@ class TaskController extends Controller
             select 
             c.course_type, c.course_id, l.lesson_id, t.task_id, q.question_id,
             c.course_name, l.title as lesson_title, t.title as task_title,
-            q.is_text_question_flag, q.title as question_title
+            q.is_text_question_flag, q.title as question_title, q.image_path
             from Course c 
             left join UserCourse uc on c.course_id = uc.course_id and user_id = ?
             left join Lesson l on l.course_id = c.course_id
@@ -45,7 +47,7 @@ class TaskController extends Controller
             group by
             c.course_type, c.course_id, l.lesson_id, t.task_id, q.question_id,
             c.course_name, l.title, t.title,
-            q.is_text_question_flag, q.title
+            q.is_text_question_flag, q.title, q.image_path
             ",
             [
                 $user->user_id,
@@ -57,18 +59,36 @@ class TaskController extends Controller
             ]
         );
 
+        $question = $questions[$question_number];
+
+        $selections = DB::select(
+            "
+            select * from QuestionChoice qc
+            where qc.question_id = ?
+            order by qc.choice_number
+            ",
+            [
+                $question->question_id
+            ]
+        );
+
+
+
         return view('task', [
             'pagetitle' => $pagetitle,
-            'course_name' => $questions[0]->course_name,
+            'course_name' => $question->course_name,
             'user' => $user,
             'display_profile' => $display_profile,
-            'questions' => $questions,
+            'question' => $question,
             'coursetype' => $coursetype,
             'courseid' => $courseid,
             'lessonid' => $lessonid,
             'taskid' => $taskid,
-            'lesson_title' => $questions[0]->lesson_title,
-            'task_title' => $questions[0]->task_title
+            'lesson_title' => $question->lesson_title,
+            'task_title' => $question->task_title,
+            'question_number' => $question_number,
+            'selections' => $selections,
+            'question_count' => count($questions)
         ]);
     }
 }
